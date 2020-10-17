@@ -8,6 +8,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import {IdentityContextProvider} from 'react-netlify-identity-widget'
 
 import Header from "./header"
 import "./layout.css"
@@ -24,7 +25,7 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
+    <IdentityContextProvider url="https://pet-qrcode.netlify.app/">
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div
         style={{
@@ -42,7 +43,7 @@ const Layout = ({ children }) => {
           <a href="https://www.gatsbyjs.com">Gatsby</a>
         </footer>
       </div>
-    </>
+      </IdentityContextProvider>
   )
 }
 
