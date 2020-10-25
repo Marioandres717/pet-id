@@ -13,7 +13,8 @@ import PetCreate from "../components/pet-create"
 import "react-netlify-identity-widget/styles.css"
 
 const client = new ApolloClient({
-  uri: "https://fine-monster-81.hasura.app/v1/graphql",
+  // eslint-disable-next-line no-undef
+  uri: process.env.GATSBY_GRAPHQL_URI,
   cache: new InMemoryCache(),
 })
 
