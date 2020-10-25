@@ -3,14 +3,12 @@ import IdentityModal from "react-netlify-identity-widget"
 
 import "react-netlify-identity-widget/styles.css"
 
-import Layout from "../components/layout"
-
 const Dashboard = () => {
   const [isVisible, setVisibility] = useState(false)
   const showModal = () => setVisibility(true)
 
   return (
-    <Layout>
+    <>
       <h1>Hi people</h1>
       <p>We`lcome to your new Gatsby site.</p>
       <p>Now go build something great.</p>
@@ -19,7 +17,7 @@ const Dashboard = () => {
         showDialog={isVisible}
         onCloseDialog={() => setVisibility(false)}
       />
-    </Layout>
+    </>
   )
 }
 
