@@ -7,6 +7,7 @@ import "react-netlify-identity-widget/styles.css"
 import Login from "../components/login"
 import Home from "../components/home"
 import PrivateRoute from "../components/private-route"
+import Profile from "../components/profile"
 
 const Dashboard = ({ location }) => {
   const [isVisible, setVisibility] = useState(false)
@@ -20,6 +21,7 @@ const Dashboard = ({ location }) => {
 
   return (
     <>
+      <Profile showModal={showModal} />
       <Router>
         <Login path="/dashboard/login" showModal={showModal} />
         <PrivateRoute path="/dashboard/home" component={Home} />
