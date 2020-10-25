@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Router } from "@reach/router"
 import { navigate } from "gatsby"
 import IdentityModal from "react-netlify-identity-widget"
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
+import { ApolloProvider } from "@apollo/client"
 
 import Login from "../components/login"
 import Home from "../components/home"
@@ -11,12 +11,7 @@ import Profile from "../components/profile"
 import PetCreate from "../components/pet-create"
 
 import "react-netlify-identity-widget/styles.css"
-
-const client = new ApolloClient({
-  // eslint-disable-next-line no-undef
-  uri: process.env.GATSBY_GRAPHQL_URI,
-  cache: new InMemoryCache(),
-})
+import client from "../gatsby-theme-apollo/client"
 
 const Dashboard = ({ location }) => {
   const [isVisible, setVisibility] = useState(false)
