@@ -8,6 +8,7 @@ import Login from "../components/login"
 import Home from "../components/home"
 import PrivateRoute from "../components/private-route"
 import Profile from "../components/profile"
+import PetCreate from "../components/pet-create"
 
 import "react-netlify-identity-widget/styles.css"
 
@@ -33,6 +34,7 @@ const Dashboard = ({ location }) => {
         <Router>
           <Login path="/dashboard/login" showModal={showModal} />
           <PrivateRoute path="/dashboard/home" component={Home} />
+          <PrivateRoute path="/dashboard/pets" component={PetCreate} />
         </Router>
         <IdentityModal
           showDialog={isVisible}
