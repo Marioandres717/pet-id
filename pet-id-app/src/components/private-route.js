@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { Component } from "react"
 import { navigate } from "gatsby"
 import { useIdentityContext } from "react-netlify-identity"
