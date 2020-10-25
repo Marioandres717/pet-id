@@ -8,4 +8,12 @@
         "strict": 0,
         "react/prop-types": 0
     },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "env": {
+        "browser": true
+    }
 }
