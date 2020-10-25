@@ -6,7 +6,7 @@ import "react-netlify-identity-widget/styles.css"
 import Layout from "../components/layout"
 
 const Dashboard = () => {
-  const [isVisible, setVisibility] = useState(true)
+  const [isVisible, setVisibility] = useState(false)
   const showModal = () => setVisibility(true)
 
   return (
