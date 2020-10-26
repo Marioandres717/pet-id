@@ -1,5 +1,6 @@
 {
     "parser": "babel-eslint",
+    "plugins": ["eslint-plugin-react-hooks"],
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended"
@@ -7,7 +8,9 @@
     "rules": {
         "strict": 0,
         "react/prop-types": 0,
-        "no-unused-vars": 1
+        "no-unused-vars": 1,
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
     },
     "settings": {
         "react": {

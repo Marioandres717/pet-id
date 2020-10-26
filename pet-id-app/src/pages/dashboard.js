@@ -4,14 +4,16 @@ import { navigate } from "gatsby"
 import IdentityModal from "react-netlify-identity-widget"
 import { ApolloProvider } from "@apollo/client"
 
+import client from "../gatsby-theme-apollo/client"
+
 import Login from "../components/login"
 import Home from "../components/home"
 import PrivateRoute from "../components/private-route"
 import Profile from "../components/profile"
 import PetCreate from "../components/pet-create"
 
+import "@reach/tabs/styles.css"
 import "react-netlify-identity-widget/styles.css"
-import client from "../gatsby-theme-apollo/client"
 
 const Dashboard = ({ location }) => {
   const [isVisible, setVisibility] = useState(false)
