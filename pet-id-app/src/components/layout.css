@@ -26,6 +26,11 @@ main {
   width: 90vw;
 }
 
+footer {
+  margin-top: 2rem;
+  padding: 1rem 5vw;
+}
+
 .dashboard-header {
   align-items: baseline;
   background: #ddd;
