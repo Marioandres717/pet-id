@@ -17,10 +17,9 @@ const USER_BY_AUTH_ID = gql`
 `
 
 const Home = () => {
-  const identity = useIdentityContext()
-  const { id: authId } = identity && identity.user
+  const { user: netlifyUser, isConfirmedUser } = useIdentityContext()
   const { loading, error, data } = useQuery(USER_BY_AUTH_ID, {
-    variables: { authId },
+    variables: { authId: netlifyUser.id },
   })
 
   if (loading) return <p>LOADING....</p>
@@ -29,12 +28,20 @@ const Home = () => {
   const [user] = data.users
   return (
     <div>
-      <fieldset>
-        <legend>User Information</legend>
-        <p>
-          {user.id}: {user.name}: {user.authId}
-        </p>
-      </fieldset>
+      {!isConfirmedUser && (
+        <pre style={{ backgroundColor: "papayawhip" }}>
+          You have not confirmed your email. Please confirm it before you use
+          the site.
+        </pre>
+      )}
+      {isConfirmedUser && (
+        <fieldset>
+          <legend>User Information</legend>
+          <p>
+            {user.id}: {user.name}: {user.authId}
+          </p>
+        </fieldset>
+      )}
     </div>
   )
 }
