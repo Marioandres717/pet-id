@@ -10,7 +10,7 @@ const PET_SPECIES = gql`
   }
 `
 
-const PetCreate = () => {
+const Pet = () => {
   const { loading, error, data } = useQuery(PET_SPECIES)
 
   if (loading) return <p>Loading...</p>
@@ -24,4 +24,4 @@ const PetCreate = () => {
     </div>
   ))
 }
-export default PetCreate
+export default Pet

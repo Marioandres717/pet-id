@@ -6,8 +6,8 @@ import IdentityModal from "react-netlify-identity-widget"
 import Login from "../components/login"
 import Home from "../components/home"
 import PrivateRoute from "../components/private-route"
-import Profile from "../components/profile"
-import PetCreate from "../components/pet-create"
+import Nav from "../components/nav"
+import Pet from "../components/pet"
 
 import "@reach/tabs/styles.css"
 import "react-netlify-identity-widget/styles.css"
@@ -24,11 +24,11 @@ const Dashboard = ({ location }) => {
 
   return (
     <>
-      <Profile showModal={showModal} />
+      <Nav showModal={showModal} />
       <Router>
         <Login path="/dashboard/login" showModal={showModal} />
         <PrivateRoute path="/dashboard/home" component={Home} />
-        <PrivateRoute path="/dashboard/pets" component={PetCreate} />
+        <PrivateRoute path="/dashboard/pets" component={Pet} />
       </Router>
       <IdentityModal
         showDialog={isVisible}

@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { useIdentityContext } from "react-netlify-identity"
 
-const Profile = ({ showModal }) => {
+const Nav = ({ showModal }) => {
   const identity = useIdentityContext()
   const isLoggedIn = identity && identity.isLoggedIn
 
@@ -16,12 +16,11 @@ const Profile = ({ showModal }) => {
     isLoggedIn && (
       <div className="dashboard-header">
         <nav>
-          <Link to="/dashboard/pets" activeClassName="active">
-            See Your pets
-          </Link>
-
           <Link to="/dashboard/home" activeClassName="active">
             See Your home
+          </Link>
+          <Link to="/dashboard/pets" activeClassName="active">
+            See Your pets
           </Link>
         </nav>
         <span>
@@ -32,4 +31,4 @@ const Profile = ({ showModal }) => {
   )
 }
 
-export default Profile
+export default Nav
