@@ -1,6 +1,7 @@
 import React from "react"
 import { useIdentityContext } from "react-netlify-identity"
 import { gql, useQuery } from "@apollo/client"
+import Address from "./address"
 
 const USER_BY_AUTH_ID = gql`
   query UserByAuthId($authId: String!) {
@@ -29,17 +30,19 @@ const Home = () => {
   return (
     <div>
       {!isConfirmedUser && (
-        <pre style={{ backgroundColor: "papayawhip" }}>
-          You have not confirmed your email. Please confirm it before you use
-          the site.
-        </pre>
+        <>
+          <pre style={{ backgroundColor: "papayawhip" }}>
+            You have not confirmed your email. Please confirm it before you use
+            the site.
+          </pre>
+          <button>Verify</button>
+        </>
       )}
       {isConfirmedUser && (
         <fieldset>
           <legend>User Information</legend>
-          <p>
-            {user.id}: {user.name}: {user.authId}
-          </p>
+          <p>Address</p>
+          <Address />
         </fieldset>
       )}
     </div>
