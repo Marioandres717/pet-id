@@ -1,27 +1,105 @@
-import React from "react"
-import { gql, useQuery } from "@apollo/client"
+import React, { useReducer } from "react"
+import { gql, useMutation } from "@apollo/client"
 
-const PET_SPECIES = gql`
-  query GetPetSpecies {
-    pet_species {
+const CREATE_PET = gql`
+  mutation insertPet($input: pets_insert_input!) {
+    insert_pets_one(object: $input) {
       id
-      type
+      name
+      species
+      description
+      uuid
     }
   }
 `
 
+const INITIAL_STATE = {
+  name: "",
+  description: "",
+  species: "",
+}
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "updateFieldValue":
+      return { ...state, [action.field]: action.value }
+
+    case "reset":
+      return init(action.payload)
+    default:
+      return INITIAL_STATE
+  }
+}
+
+const init = pet => (pet ? pet : INITIAL_STATE)
+
+const inputStyle = { display: "block", margin: "0.5rem" }
+
 const Pet = () => {
-  const { loading, error, data } = useQuery(PET_SPECIES)
+  const [state, dispatch] = useReducer(reducer, INITIAL_STATE, init)
+  const [addPet, { data, called, loading }] = useMutation(CREATE_PET, {
+    onError: e => console.error("error", e),
+  })
+
+  const updateFieldValue = field => event => {
+    dispatch({
+      type: "updateFieldValue",
+      field,
+      value: event.target.value,
+    })
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    addPet({ variables: { input: state } })
+    dispatch({
+      type: "reset",
+      payload: state,
+    })
+  }
 
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Error 😢 </p>
 
-  return data.pet_species.map(({ id, type }) => (
-    <div key={id}>
-      <p>
-        {id}: {type}
-      </p>
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Name</label>
+        <input
+          style={inputStyle}
+          type="text"
+          name="name"
+          value={state.name}
+          onChange={updateFieldValue("name")}
+        />
+
+        <label htmlFor="description">Description</label>
+        <input
+          style={inputStyle}
+          type="text"
+          name="description"
+          value={state.description}
+          onChange={updateFieldValue("description")}
+        />
+
+        <label htmlFor="species">Species</label>
+        <select
+          style={inputStyle}
+          type="text"
+          name="species"
+          value={state.species}
+          onChange={updateFieldValue("species")}
+        >
+          <option value={""}>Select</option>
+          <option value={1}>Dog</option>
+          <option value={2}>Cat</option>
+        </select>
+
+        {console.log("state", state)}
+
+        <button type="submit">submit</button>
+      </form>
+      <div>{data && <h1>{data.insert_pets_one.uuid}</h1>}</div>
     </div>
-  ))
+  )
 }
 export default Pet
