@@ -1,8 +1,17 @@
-import React, { useEffect, useReducer } from "react"
-import { gql, useMutation, useQuery } from "@apollo/client"
+import React, { useReducer } from "react"
+import { gql, useMutation } from "@apollo/client"
 
 const CREATE_ADDRESS = gql`
-  mutation insertAddress($input: Addresses_insert_input!) {
+  mutation updateUserAddress(
+    $id: Int!
+    $phone: String!
+    $input: Addresses_insert_input!
+  ) {
+    update_users_by_pk(pk_columns: { id: $id }, _set: { phone: $phone }) {
+      id
+      phone
+      addressId
+    }
     insert_Addresses_one(object: $input) {
       id
       city
@@ -23,6 +32,7 @@ const INITIAL_STATE = {
   province_or_state: "",
   zip_or_postcode: "",
   other_address_details: "",
+  phone: "",
   userId: null,
 }
 
@@ -41,15 +51,7 @@ const inputStyle = { display: "block", margin: "0.5rem" }
 
 const Address = ({ userId }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
-  const [addAddress, { data }] = useMutation(CREATE_ADDRESS)
-
-  useEffect(() => {
-    dispatch({
-      type: "updateFieldValue",
-      field: "userId",
-      value: userId,
-    })
-  }, [userId])
+  const [addAddress, { data, called }] = useMutation(CREATE_ADDRESS)
 
   const updateFieldValue = field => event => {
     dispatch({
@@ -61,15 +63,24 @@ const Address = ({ userId }) => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    addAddress({ variables: { input: state } })
+    const { phone, ...rest } = { ...state, userId }
+    addAddress({ variables: { id: userId, phone: phone, input: rest } })
     dispatch({
       type: "reset",
     })
   }
 
   return (
-    <div style={{ display: "grid", gridColumns: "1fr 1fr", gridRow: "2" }}>
+    <div>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="phone">Phone</label>
+        <input
+          style={inputStyle}
+          type="text"
+          name="phone"
+          value={state.phone}
+          onChange={updateFieldValue("phone")}
+        />
         <label htmlFor="country">country</label>
         <input
           style={inputStyle}

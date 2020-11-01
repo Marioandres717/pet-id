@@ -11,6 +11,7 @@ const USER_BY_AUTH_ID = gql`
       email
       phone
       avatar
+      addressId
     }
   }
 `
@@ -25,6 +26,7 @@ const Home = () => {
   if (error) return <p>Error: {error}</p>
 
   const [user] = data.users
+
   return (
     <div>
       {!isConfirmedUser && (
