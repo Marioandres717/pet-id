@@ -6,13 +6,11 @@ import Address from "./address"
 const USER_BY_AUTH_ID = gql`
   query UserByAuthId($authId: String!) {
     users(where: { authId: { _eq: $authId } }) {
-      addressId
-      authId
-      avatar
-      email
-      name
       id
+      name
+      email
       phone
+      avatar
     }
   }
 `
@@ -41,8 +39,9 @@ const Home = () => {
       {isConfirmedUser && (
         <fieldset>
           <legend>User Information</legend>
+
           <p>Address</p>
-          <Address />
+          <Address userId={user.id} />
         </fieldset>
       )}
     </div>

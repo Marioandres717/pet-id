@@ -1,13 +1,13 @@
-import React, { useReducer } from "react"
-import { gql, useMutation } from "@apollo/client"
+import React, { useEffect, useReducer } from "react"
+import { gql, useMutation, useQuery } from "@apollo/client"
 
 const CREATE_ADDRESS = gql`
-  mutation insert_address($input: Addresses_insert_input!) {
+  mutation insertAddress($input: Addresses_insert_input!) {
     insert_Addresses_one(object: $input) {
+      id
       city
       country
       line_1
-      id
       userId
       zip_or_postcode
       province_or_state
@@ -23,7 +23,7 @@ const INITIAL_STATE = {
   province_or_state: "",
   zip_or_postcode: "",
   other_address_details: "",
-  userId: "25",
+  userId: null,
 }
 
 const reducer = (state, action) => {
@@ -38,9 +38,18 @@ const reducer = (state, action) => {
 }
 
 const inputStyle = { display: "block", margin: "0.5rem" }
-const Address = () => {
+
+const Address = ({ userId }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
   const [addAddress, { data }] = useMutation(CREATE_ADDRESS)
+
+  useEffect(() => {
+    dispatch({
+      type: "updateFieldValue",
+      field: "userId",
+      value: userId,
+    })
+  }, [userId])
 
   const updateFieldValue = field => event => {
     dispatch({
@@ -58,18 +67,9 @@ const Address = () => {
     })
   }
 
-  console.log("data", data)
   return (
-    <div style={{ display: "grid", gridColumns: "1fr 1fr" }}>
+    <div style={{ display: "grid", gridColumns: "1fr 1fr", gridRow: "2" }}>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="phone">Phone</label>
-        <input
-          style={inputStyle}
-          type="text"
-          name="phone"
-          //   value={state.phone}
-          //   onChange={updateFieldValue("phone")}
-        />
         <label htmlFor="country">country</label>
         <input
           style={inputStyle}
@@ -126,7 +126,7 @@ const Address = () => {
           onChange={updateFieldValue("other_address_details")}
         />
 
-        <button style={{ padding: "1rem" }} type="submit">
+        <button style={{ padding: "0.5rem" }} type="submit">
           Create
         </button>
       </form>
