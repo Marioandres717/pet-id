@@ -8,6 +8,7 @@ const client = new ApolloClient({
     uri: process.env.GATSBY_GRAPHQL_URI,
     fetch,
   }),
+  connectToDevTools: true,
 })
 
 export default client

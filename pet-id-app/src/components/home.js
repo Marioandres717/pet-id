@@ -50,8 +50,10 @@ const Home = () => {
         <fieldset>
           <legend>User Information</legend>
 
-          <p>Address</p>
-          <Address userId={user.id} />
+          <div>
+            <p>Address</p>
+            <Address userId={user.id} address={user.address} />
+          </div>
         </fieldset>
       )}
     </div>

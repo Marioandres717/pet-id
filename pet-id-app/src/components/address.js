@@ -1,3 +1,5 @@
+// @TODO add validation to fields
+
 import React, { useEffect, useReducer } from "react"
 import { gql, useMutation } from "@apollo/client"
 
@@ -32,7 +34,9 @@ const UPDATE_USER_ADDRESS_ID = gql`
       _set: { addressId: $addressId }
     ) {
       id
-      addressId
+      address {
+        id
+      }
     }
   }
 `
@@ -48,12 +52,15 @@ const INITIAL_STATE = {
   userId: null,
 }
 
+const init = address => (address ? address : INITIAL_STATE)
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "updateFieldValue":
       return { ...state, [action.field]: action.value }
 
     case "reset":
+      return init(action.payload)
     default:
       return INITIAL_STATE
   }
@@ -61,8 +68,12 @@ const reducer = (state, action) => {
 
 const inputStyle = { display: "block", margin: "0.5rem" }
 
-const Address = ({ userId }) => {
-  const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
+const Address = ({ userId, address }) => {
+  const [state, dispatch] = useReducer(
+    reducer,
+    address ? address : INITIAL_STATE,
+    init
+  )
   const [addAddress, { data, called, loading }] = useMutation(CREATE_ADDRESS, {
     onError: e => console.error("error", e),
   })
@@ -92,6 +103,7 @@ const Address = ({ userId }) => {
     addAddress({ variables: { id: userId, phone: phone, input: rest } })
     dispatch({
       type: "reset",
+      payload: state,
     })
   }
 
