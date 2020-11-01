@@ -11,7 +11,15 @@ const USER_BY_AUTH_ID = gql`
       email
       phone
       avatar
-      addressId
+      address {
+        id
+        city
+        country
+        line_1
+        other_address_details
+        province_or_state
+        zip_or_postcode
+      }
     }
   }
 `
