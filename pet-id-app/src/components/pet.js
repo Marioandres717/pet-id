@@ -2,13 +2,23 @@ import React, { useReducer } from "react"
 import { gql, useMutation } from "@apollo/client"
 
 const CREATE_PET = gql`
-  mutation insertPet($input: pets_insert_input!) {
-    insert_pets_one(object: $input) {
-      id
-      name
-      species
-      description
-      uuid
+  mutation insertPet($input: [user_pets_insert_input!]!) {
+    insert_user_pets(objects: $input) {
+      affected_rows
+      returning {
+        id
+        user {
+          id
+          name
+        }
+        pet {
+          id
+          name
+          species
+          description
+          uuid
+        }
+      }
     }
   }
 `
@@ -37,7 +47,7 @@ const inputStyle = { display: "block", margin: "0.5rem" }
 
 const Pet = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE, init)
-  const [addPet, { data, called, loading }] = useMutation(CREATE_PET, {
+  const [addPet, { data, loading }] = useMutation(CREATE_PET, {
     onError: e => console.error("error", e),
   })
 
@@ -51,7 +61,17 @@ const Pet = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    addPet({ variables: { input: state } })
+    addPet({
+      variables: {
+        input: {
+          // @TODO remove
+          userId: 25,
+          pet: {
+            data: state,
+          },
+        },
+      },
+    })
     dispatch({
       type: "reset",
       payload: state,
@@ -98,7 +118,9 @@ const Pet = () => {
 
         <button type="submit">submit</button>
       </form>
-      <div>{data && <h1>{data.insert_pets_one.uuid}</h1>}</div>
+      <div>
+        {data && <h1>{data.insert_user_pets.returning[0].pet.uuid}</h1>}
+      </div>
     </div>
   )
 }
