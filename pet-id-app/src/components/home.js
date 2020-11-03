@@ -20,6 +20,16 @@ const USER_BY_AUTH_ID = gql`
         province_or_state
         zip_or_postcode
       }
+      user_pets {
+        pet {
+          id
+          name
+          species
+          description
+          uuid
+          avatar
+        }
+      }
     }
   }
 `
