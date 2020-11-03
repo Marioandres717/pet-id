@@ -4,4 +4,9 @@ exports.onCreatePage = ({ page, actions }) => {
     page.matchPath = "/dashboard/*"
     actions.createPage(page)
   }
+
+  if (page.path.match(/^\/app/)) {
+    page.matchPath = "/app/*"
+    actions.createPage(page)
+  }
 }
