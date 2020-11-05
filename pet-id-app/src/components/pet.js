@@ -1,5 +1,8 @@
-import React, { useReducer } from "react"
+import React, { useContext, useReducer } from "react"
 import { gql, useMutation } from "@apollo/client"
+
+import { UserContext } from "../hooks/user-context"
+import QRCodeGen from "./qrcode-gen"
 
 const CREATE_PET = gql`
   mutation insertPet($input: [user_pets_insert_input!]!) {
@@ -47,6 +50,7 @@ const inputStyle = { display: "block", margin: "0.5rem" }
 
 const Pet = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE, init)
+  const { user } = useContext(UserContext)
   const [addPet, { data, loading }] = useMutation(CREATE_PET, {
     onError: e => console.error("error", e),
   })
@@ -64,8 +68,7 @@ const Pet = () => {
     addPet({
       variables: {
         input: {
-          // @TODO remove
-          userId: 25,
+          userId: user.id,
           pet: {
             data: state,
           },
@@ -119,7 +122,9 @@ const Pet = () => {
         <button type="submit">submit</button>
       </form>
       <div>
-        {data && <h1>{data.insert_user_pets.returning[0].pet.uuid}</h1>}
+        {data && (
+          <QRCodeGen data={data.insert_user_pets.returning[0].pet.uuid} />
+        )}
       </div>
     </div>
   )

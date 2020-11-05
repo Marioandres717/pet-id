@@ -41,14 +41,25 @@ const App = ({ location }) => {
 
   if (data.pets.length) {
     const [pet] = data.pets
+    const { user } = pet.user_pets[0]
+    const { address } = user
     return (
       <>
         <h3>
           {pet.id} - {pet.uuid}
         </h3>
-        <p>{pet.name}</p>
+        <p>{pet.name}</p>``
         <p>{pet.description}</p>
         <p>{pet.species}</p>
+        <h3>{user.id}</h3>
+        <p>{user.name}</p>
+        <p>
+          {user.email} - {user.phone}
+        </p>
+        <p>{address.id}</p>
+        <p>{address.line_1}</p>
+        <p>{address.city}</p>
+        <p>{address.country}</p>
       </>
     )
   }
