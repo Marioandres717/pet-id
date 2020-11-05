@@ -3,6 +3,8 @@ import { Router } from "@reach/router"
 import { navigate } from "gatsby"
 import IdentityModal from "react-netlify-identity-widget"
 
+import { UserProvider } from "../hooks/user-context"
+
 import Login from "../components/login"
 import Home from "../components/home"
 import PrivateRoute from "../components/private-route"
@@ -23,7 +25,7 @@ const Dashboard = ({ location }) => {
   }, [location.pathname])
 
   return (
-    <>
+    <UserProvider>
       <Nav showModal={showModal} />
       <Router>
         <Login path="/dashboard/login" showModal={showModal} />
@@ -34,7 +36,7 @@ const Dashboard = ({ location }) => {
         showDialog={isVisible}
         onCloseDialog={() => setVisibility(false)}
       />
-    </>
+    </UserProvider>
   )
 }
 
