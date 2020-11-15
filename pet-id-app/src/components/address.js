@@ -1,5 +1,3 @@
-// @TODO add validation to fields
-
 import React, { useEffect, useReducer } from "react"
 import { gql, useMutation } from "@apollo/client"
 
@@ -77,7 +75,7 @@ const inputStyle = { display: "block", margin: "0.5rem" }
 const Address = ({ userId, address }) => {
   const [addressState, dispatch] = useReducer(
     reducer,
-    address ? address : INITIAL_STATE,
+    address ? address : { ...INITIAL_STATE, userId },
     init
   )
   const [addAddress, { data, called, loading }] = useMutation(CREATE_ADDRESS, {
@@ -121,7 +119,7 @@ const Address = ({ userId, address }) => {
         variables: { id: addressState.id, input: addressFields },
       })
     } else {
-      addAddress({ variables: { input: { ...addressState, userId } } })
+      addAddress({ variables: { input: addressState } })
     }
   }
 
