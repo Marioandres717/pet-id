@@ -7,7 +7,6 @@ const USER_BY_AUTH_ID = gql`
       id
       name
       email
-      phone
       avatar
       address {
         id
@@ -17,6 +16,7 @@ const USER_BY_AUTH_ID = gql`
         other_address_details
         province_or_state
         zip_or_postcode
+        phone
       }
       user_pets {
         pet {

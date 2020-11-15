@@ -4,31 +4,23 @@ import React, { useEffect, useReducer } from "react"
 import { gql, useMutation } from "@apollo/client"
 
 const CREATE_ADDRESS = gql`
-  mutation insertAddress(
-    $id: Int!
-    $phone: String!
-    $input: Addresses_insert_input!
-  ) {
+  mutation insertAddress($input: Addresses_insert_input!) {
     insert_Addresses_one(object: $input) {
       id
       city
       country
       line_1
-      userId
-      zip_or_postcode
       province_or_state
-      other_address_details
-    }
-
-    update_users_by_pk(pk_columns: { id: $id }, _set: { phone: $phone }) {
-      id
+      zip_or_postcode
       phone
+      userId
+      other_address_details
     }
   }
 `
 
 const UPDATE_USER_ADDRESS_ID = gql`
-  mutation updateAddress($id: Int!, $addressId: Int!) {
+  mutation updateUserAddress($id: Int!, $addressId: Int!) {
     update_users_by_pk(
       pk_columns: { id: $id }
       _set: { addressId: $addressId }
@@ -37,6 +29,20 @@ const UPDATE_USER_ADDRESS_ID = gql`
       address {
         id
       }
+    }
+  }
+`
+
+const UPDATE_ADDRESS = gql`
+  mutation updateAddress($id: Int!, $input: Addresses_set_input!) {
+    update_Addresses_by_pk(pk_columns: { id: $id }, _set: $input) {
+      id
+      country
+      line_1
+      city
+      other_address_details
+      province_or_state
+      zip_or_postcode
     }
   }
 `
@@ -69,7 +75,7 @@ const reducer = (state, action) => {
 const inputStyle = { display: "block", margin: "0.5rem" }
 
 const Address = ({ userId, address }) => {
-  const [state, dispatch] = useReducer(
+  const [addressState, dispatch] = useReducer(
     reducer,
     address ? address : INITIAL_STATE,
     init
@@ -78,6 +84,9 @@ const Address = ({ userId, address }) => {
     onError: e => console.error("error", e),
   })
   const [updateUserAddressId] = useMutation(UPDATE_USER_ADDRESS_ID, {
+    onError: e => console.error("error", e),
+  })
+  const [updateAddress] = useMutation(UPDATE_ADDRESS, {
     onError: e => console.error("error", e),
   })
 
@@ -99,12 +108,15 @@ const Address = ({ userId, address }) => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    const { phone, ...rest } = { ...state, userId }
-    addAddress({ variables: { id: userId, phone: phone, input: rest } })
-    dispatch({
-      type: "reset",
-      payload: state,
-    })
+    if (addressState.id) {
+      // eslint-disable-next-line no-unused-vars
+      const { __typename, ...addressFields } = addressState
+      updateAddress({
+        variables: { id: addressState.id, input: addressFields },
+      })
+    } else {
+      addAddress({ variables: { input: { ...addressState, userId } } })
+    }
   }
 
   return (
@@ -115,7 +127,7 @@ const Address = ({ userId, address }) => {
           style={inputStyle}
           type="text"
           name="phone"
-          value={state.phone}
+          value={addressState.phone}
           onChange={updateFieldValue("phone")}
         />
         <label htmlFor="country">country</label>
@@ -123,7 +135,7 @@ const Address = ({ userId, address }) => {
           style={inputStyle}
           type="text"
           name="country"
-          value={state.country}
+          value={addressState.country}
           onChange={updateFieldValue("country")}
         />
 
@@ -132,7 +144,7 @@ const Address = ({ userId, address }) => {
           style={inputStyle}
           type="text"
           name="line_1"
-          value={state.line_1}
+          value={addressState.line_1}
           onChange={updateFieldValue("line_1")}
         />
 
@@ -141,7 +153,7 @@ const Address = ({ userId, address }) => {
           style={inputStyle}
           type="text"
           name="city"
-          value={state.city}
+          value={addressState.city}
           onChange={updateFieldValue("city")}
         />
 
@@ -152,7 +164,7 @@ const Address = ({ userId, address }) => {
           style={inputStyle}
           type="text"
           name="province_or_state"
-          value={state.province_or_state}
+          value={addressState.province_or_state}
           onChange={updateFieldValue("province_or_state")}
         />
 
@@ -161,7 +173,7 @@ const Address = ({ userId, address }) => {
           style={inputStyle}
           type="text"
           name="zip_or_postcode"
-          value={state.zip_or_postcode}
+          value={addressState.zip_or_postcode}
           onChange={updateFieldValue("zip_or_postcode")}
         />
 
@@ -170,15 +182,27 @@ const Address = ({ userId, address }) => {
           style={inputStyle}
           type="text"
           name="other_address_details"
-          value={state.other_address_details}
+          value={addressState.other_address_details}
           onChange={updateFieldValue("other_address_details")}
         />
 
+        <button
+          style={{ padding: "0.5rem", marginRight: "5px" }}
+          type="button"
+          onClick={() =>
+            dispatch({
+              type: "reset",
+              payload: addressState,
+            })
+          }
+        >
+          Delete
+        </button>
+
         <button style={{ padding: "0.5rem" }} type="submit">
-          Create
+          {addressState.id ? "Update" : "Create "}
         </button>
       </form>
-      {data && <div>{data.insert_Addresses_one.id}</div>}
     </div>
   )
 }
