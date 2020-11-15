@@ -92,8 +92,14 @@ const Address = ({ userId, address }) => {
 
   useEffect(() => {
     if (called && !loading && data) {
+      const addressId = data.insert_Addresses_one.id
       updateUserAddressId({
-        variables: { id: userId, addressId: data.insert_Addresses_one.id },
+        variables: { id: userId, addressId },
+      })
+      dispatch({
+        type: "updateFieldValue",
+        field: "id",
+        value: addressId,
       })
     }
   }, [called, data, loading, updateUserAddressId, userId])
@@ -112,7 +118,7 @@ const Address = ({ userId, address }) => {
       // eslint-disable-next-line no-unused-vars
       const { __typename, ...addressFields } = addressState
       updateAddress({
-        variables: { id: addressState.id, input: addressFields },
+        variables: { id: addressState.id, input: { ...addressFields, userId } },
       })
     } else {
       addAddress({ variables: { input: { ...addressState, userId } } })
