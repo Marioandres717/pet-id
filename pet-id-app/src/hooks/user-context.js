@@ -17,6 +17,7 @@ const USER_BY_AUTH_ID = gql`
         province_or_state
         zip_or_postcode
         phone
+        userId
       }
       user_pets {
         pet {

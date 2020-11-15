@@ -118,7 +118,7 @@ const Address = ({ userId, address }) => {
       // eslint-disable-next-line no-unused-vars
       const { __typename, ...addressFields } = addressState
       updateAddress({
-        variables: { id: addressState.id, input: { ...addressFields, userId } },
+        variables: { id: addressState.id, input: addressFields },
       })
     } else {
       addAddress({ variables: { input: { ...addressState, userId } } })
