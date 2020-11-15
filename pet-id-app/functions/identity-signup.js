@@ -4,7 +4,6 @@ const graphqlURI = process.env.GATSBY_GRAPHQL_URI
 const CREATE_USER = `
   mutation insert_user($input: users_insert_input!) {
     insert_users_one(object: $input) {
-      phone
       name
       id
       email
