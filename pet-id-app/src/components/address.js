@@ -45,6 +45,22 @@ const UPDATE_ADDRESS = gql`
   }
 `
 
+const DELETE_ADDRESS = gql`
+  mutation deleteAddress($id: Int!) {
+    delete_Addresses_by_pk(id: $id) {
+      city
+      country
+      id
+      other_address_details
+      line_1
+      phone
+      province_or_state
+      userId
+      zip_or_postcode
+    }
+  }
+`
+
 const INITIAL_STATE = {
   country: "",
   line_1: "",
@@ -87,6 +103,9 @@ const Address = ({ userId, address }) => {
   const [updateAddress] = useMutation(UPDATE_ADDRESS, {
     onError: e => console.error("error", e),
   })
+  const [deleteAddress] = useMutation(DELETE_ADDRESS, {
+    onError: e => console.error("error", e),
+  })
 
   useEffect(() => {
     if (called && !loading && data) {
@@ -116,11 +135,21 @@ const Address = ({ userId, address }) => {
       // eslint-disable-next-line no-unused-vars
       const { __typename, ...addressFields } = addressState
       updateAddress({
-        variables: { id: addressState.id, input: addressFields },
+        variables: { id: addressState.id, input: { ...addressFields, userId } },
       })
     } else {
-      addAddress({ variables: { input: addressState } })
+      addAddress({ variables: { input: { ...addressState, userId } } })
     }
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  const handleDelete = event => {
+    if (addressState.id) {
+      deleteAddress({ variables: { id: addressState.id } })
+    }
+    dispatch({
+      type: "reset",
+    })
   }
 
   return (
@@ -193,14 +222,9 @@ const Address = ({ userId, address }) => {
         <button
           style={{ padding: "0.5rem", marginRight: "5px" }}
           type="button"
-          onClick={() =>
-            dispatch({
-              type: "reset",
-              payload: addressState,
-            })
-          }
+          onClick={handleDelete}
         >
-          Delete
+          {addressState.id ? "Delete" : "Reset "}
         </button>
 
         <button style={{ padding: "0.5rem" }} type="submit">
