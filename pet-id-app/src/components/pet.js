@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react"
+import React, { useContext, useEffect, useReducer } from "react"
 import { gql, useMutation } from "@apollo/client"
 
 import { UserContext } from "../hooks/user-context"
@@ -26,6 +26,32 @@ const CREATE_PET = gql`
   }
 `
 
+const UPDATE_PET = gql`
+  mutation updatePet($id: Int!, $input: pets_set_input) {
+    update_pets_by_pk(pk_columns: { id: $id }, _set: $input) {
+      id
+      name
+      avatar
+      description
+      species
+      uuid
+    }
+  }
+`
+
+const DELETE_PET = gql`
+  mutation deletePet($id: Int!) {
+    delete_pets_by_pk(id: $id) {
+      id
+      avatar
+      description
+      name
+      species
+      uuid
+    }
+  }
+`
+
 const INITIAL_STATE = {
   name: "",
   description: "",
@@ -49,11 +75,27 @@ const init = pet => (pet ? pet : INITIAL_STATE)
 const inputStyle = { display: "block", margin: "0.5rem" }
 
 const Pet = () => {
-  const [state, dispatch] = useReducer(reducer, INITIAL_STATE, init)
+  const [petState, dispatch] = useReducer(reducer, INITIAL_STATE, init)
   const { user } = useContext(UserContext)
   const [addPet, { data, loading }] = useMutation(CREATE_PET, {
     onError: e => console.error("error", e),
   })
+  const [updatePet] = useMutation(UPDATE_PET, {
+    onError: e => console.error("error", e),
+  })
+  const [deletePet] = useMutation(DELETE_PET, {
+    onError: e => console.error("error", e),
+  })
+
+  useEffect(() => {
+    if (data) {
+      dispatch({
+        type: "updateFieldValue",
+        field: "id",
+        value: data.insert_user_pets.returning[0].pet.id,
+      })
+    }
+  }, [data])
 
   const updateFieldValue = field => event => {
     dispatch({
@@ -65,20 +107,38 @@ const Pet = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    addPet({
-      variables: {
-        input: {
-          userId: user.id,
-          pet: {
-            data: state,
+    if (petState.id) {
+      updatePet({
+        variables: {
+          id: petState.id,
+          input: petState,
+        },
+      })
+    } else {
+      addPet({
+        variables: {
+          input: {
+            userId: user.id,
+            pet: {
+              data: petState,
+            },
           },
         },
-      },
-    })
-    dispatch({
-      type: "reset",
-      payload: state,
-    })
+      })
+    }
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  const handleDelete = event => {
+    if (petState.id) {
+      deletePet({
+        variables: {
+          id: petState.id,
+        },
+      })
+    }
+
+    dispatch({ type: "reset" })
   }
 
   if (loading) return <p>Loading...</p>
@@ -91,7 +151,7 @@ const Pet = () => {
           style={inputStyle}
           type="text"
           name="name"
-          value={state.name}
+          value={petState.name}
           onChange={updateFieldValue("name")}
         />
 
@@ -100,7 +160,7 @@ const Pet = () => {
           style={inputStyle}
           type="text"
           name="description"
-          value={state.description}
+          value={petState.description}
           onChange={updateFieldValue("description")}
         />
 
@@ -109,7 +169,7 @@ const Pet = () => {
           style={inputStyle}
           type="text"
           name="species"
-          value={state.species}
+          value={petState.species}
           onChange={updateFieldValue("species")}
         >
           <option value={""}>Select</option>
@@ -117,9 +177,10 @@ const Pet = () => {
           <option value={2}>Cat</option>
         </select>
 
-        {console.log("state", state)}
-
-        <button type="submit">submit</button>
+        <button type="button" onClick={handleDelete}>
+          {petState.id ? "Delete" : "Reset"}
+        </button>
+        <button type="submit">{petState.id ? "Update" : "Create"}</button>
       </form>
       <div>
         {data && (
