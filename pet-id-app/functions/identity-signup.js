@@ -7,7 +7,7 @@ const CREATE_USER = `
       name
       id
       email
-      avatar
+      avatarId
       authId
       addressId
     }

@@ -9,14 +9,22 @@ const PET_BY_UUID = gql`
       description
       species
       uuid
-      avatar
+      avatar {
+        id
+        url
+        large_image_url
+      }
       user_pets {
         user {
           id
           name
           phone
-          avatar
           email
+          avatar {
+            id
+            url
+            large_image_url
+          }
           address {
             id
             line_1

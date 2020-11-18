@@ -7,7 +7,11 @@ const USER_BY_AUTH_ID = gql`
       id
       name
       email
-      avatar
+      avatar {
+        id
+        url
+        large_image_url
+      }
       address {
         id
         city
@@ -26,7 +30,11 @@ const USER_BY_AUTH_ID = gql`
           species
           description
           uuid
-          avatar
+          avatar {
+            id
+            url
+            large_image_url
+          }
         }
       }
     }

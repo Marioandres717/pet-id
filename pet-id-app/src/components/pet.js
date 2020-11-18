@@ -31,10 +31,15 @@ const UPDATE_PET = gql`
     update_pets_by_pk(pk_columns: { id: $id }, _set: $input) {
       id
       name
-      avatar
+      avatarId
       description
       species
       uuid
+      avatar {
+        id
+        url
+        large_image_url
+      }
     }
   }
 `
@@ -43,7 +48,7 @@ const DELETE_PET = gql`
   mutation deletePet($id: Int!) {
     delete_pets_by_pk(id: $id) {
       id
-      avatar
+      avatarId
       description
       name
       species
