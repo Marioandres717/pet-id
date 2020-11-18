@@ -3,6 +3,7 @@ import { gql, useMutation } from "@apollo/client"
 
 import { UserContext } from "../hooks/user-context"
 import QRCodeGen from "./qrcode-gen"
+import Image from "./image"
 
 const CREATE_PET = gql`
   mutation insertPet($input: [user_pets_insert_input!]!) {
@@ -150,6 +151,11 @@ const Pet = () => {
 
   return (
     <div>
+      <Image
+        image={petState.avatar}
+        entityId={petState.id}
+        updateEntity={updatePet}
+      />
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
         <input
