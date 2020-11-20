@@ -17,7 +17,8 @@ self.addEventListener("push", function (e) {
       { action: "close", title: "Close", icon: "images/xmark.png" },
     ],
   }
-  e.waitUntil(self.registration.showNotification("Hello world!", options))
+  console.log("event: ", e)
+  self.registration.showNotification("Hello world!", options)
 })
 // show a notification after 15 seconds (the notification
 // permission must be granted first)
