@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
 module.exports = {
   siteMetadata: {
     title: `Pet Id`,
@@ -21,6 +21,6 @@ module.exports = {
         crossOrigin: "use-credentials",
       },
     },
-    "gatsby-plugin-offline",
+    `gatsby-plugin-offline`,
   ],
 }
