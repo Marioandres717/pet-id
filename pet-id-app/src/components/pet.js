@@ -147,6 +147,16 @@ const Pet = () => {
     dispatch({ type: "reset" })
   }
 
+  const subscribe = async () => {
+    let sw = await navigator.serviceWorker.ready
+    let push = await sw.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey:
+        "BGueENX9LGhPRv_fmN3Rmb7bH3E48MQmGhMOKfqhtpBX-vixWkVO_XU63pd9pZUPH93_33riUeOwWGFYpbVaYYQ",
+    })
+    console.log(JSON.stringify(push))
+  }
+
   if (loading) return <p>Loading...</p>
 
   return (
@@ -193,6 +203,8 @@ const Pet = () => {
         </button>
         <button type="submit">{petState.id ? "Update" : "Create"}</button>
       </form>
+
+      <button onClick={subscribe}>Subscribe</button>
       <div>
         {data && (
           <QRCodeGen data={data.insert_user_pets.returning[0].pet.uuid} />
