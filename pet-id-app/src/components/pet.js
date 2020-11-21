@@ -4,6 +4,7 @@ import { gql, useMutation } from "@apollo/client"
 import { UserContext } from "../hooks/user-context"
 import QRCodeGen from "./qrcode-gen"
 import Image from "./image"
+import Subscription from "./subscription"
 
 const CREATE_PET = gql`
   mutation insertPet($input: [user_pets_insert_input!]!) {
@@ -147,16 +148,6 @@ const Pet = () => {
     dispatch({ type: "reset" })
   }
 
-  const subscribe = async () => {
-    let sw = await navigator.serviceWorker.ready
-    let push = await sw.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey:
-        "BGueENX9LGhPRv_fmN3Rmb7bH3E48MQmGhMOKfqhtpBX-vixWkVO_XU63pd9pZUPH93_33riUeOwWGFYpbVaYYQ",
-    })
-    console.log(JSON.stringify(push))
-  }
-
   if (loading) return <p>Loading...</p>
 
   return (
@@ -203,8 +194,7 @@ const Pet = () => {
         </button>
         <button type="submit">{petState.id ? "Update" : "Create"}</button>
       </form>
-
-      <button onClick={subscribe}>Subscribe</button>
+      <Subscription />
       <div>
         {data && (
           <QRCodeGen data={data.insert_user_pets.returning[0].pet.uuid} />
