@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { gql, useQuery } from "@apollo/client"
 
 const PET_BY_UUID = gql`
@@ -18,7 +18,6 @@ const PET_BY_UUID = gql`
         user {
           id
           name
-          phone
           email
           avatar {
             id
@@ -32,6 +31,7 @@ const PET_BY_UUID = gql`
             province_or_state
             city
             country
+            phone
           }
         }
       }
@@ -43,6 +43,21 @@ const App = ({ location }) => {
   const { loading, error, data } = useQuery(PET_BY_UUID, {
     variables: { uuid },
   })
+
+  useEffect(() => {
+    if (!loading && !error && data) {
+      const [pet] = data && data.pets
+      // eslint-disable-next-line no-undef
+      fetch(`${process.env.GATSBY_NETLIFY_URL}/api/notify-user`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(pet.user_pets[0].user),
+      })
+    }
+  }, [loading, error, data])
 
   if (loading) return <p>LOADING....</p>
   if (error) return <p>Error</p>

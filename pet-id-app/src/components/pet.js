@@ -194,7 +194,7 @@ const Pet = () => {
         </button>
         <button type="submit">{petState.id ? "Update" : "Create"}</button>
       </form>
-      <Subscription />
+      <Subscription user={user} />
       <div>
         {data && (
           <QRCodeGen data={data.insert_user_pets.returning[0].pet.uuid} />
