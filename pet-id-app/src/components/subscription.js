@@ -1,6 +1,5 @@
 import React, { useContext } from "react"
 import { gql, useMutation } from "@apollo/client"
-import { UserContext } from "../hooks/user-context"
 
 const INSERT_BROWSER_PUSH_SUBSCRIPTION = gql`
   mutation insertUserBrowser($input: user_browsers_insert_input!) {
@@ -12,8 +11,7 @@ const INSERT_BROWSER_PUSH_SUBSCRIPTION = gql`
   }
 `
 
-const Subscription = () => {
-  const { user } = useContext(UserContext)
+const Subscription = ({ user }) => {
   const [addBrowserSubscription, { loading, error, data }] = useMutation(
     INSERT_BROWSER_PUSH_SUBSCRIPTION,
     {
