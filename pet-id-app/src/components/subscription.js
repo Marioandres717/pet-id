@@ -28,7 +28,7 @@ const Subscription = ({ user }) => {
     console.log(JSON.stringify(push))
     addBrowserSubscription({
       variables: {
-        input: { userId: user.id, browser_subscription_object: push },
+        input: { user_id: user.id, browser_subscription_object: push },
       },
     })
   }
