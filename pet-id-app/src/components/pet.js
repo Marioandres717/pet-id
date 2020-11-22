@@ -151,7 +151,8 @@ const Pet = () => {
   if (loading) return <p>Loading...</p>
 
   return (
-    <div>
+    <fieldset>
+      <legend>Pet Information</legend>
       <Image
         image={petState.avatar}
         entityId={petState.id}
@@ -200,7 +201,7 @@ const Pet = () => {
           <QRCodeGen data={data.insert_user_pets.returning[0].pet.uuid} />
         )}
       </div>
-    </div>
+    </fieldset>
   )
 }
 export default Pet
