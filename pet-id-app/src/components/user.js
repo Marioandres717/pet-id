@@ -109,7 +109,7 @@ const User = ({ user }) => {
           Email
           <input
             style={inputStyle}
-            type="emai"
+            type="email"
             name="email"
             value={userState.email}
             onChange={updateFieldValue("email")}

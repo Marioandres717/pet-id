@@ -4,7 +4,7 @@ import Address from "./address"
 import { UserContext } from "../hooks/user-context"
 import User from "./user"
 
-const Home = () => {
+const Profile = () => {
   const { user: netlifyUser, isConfirmedUser } = useIdentityContext()
   const { user, getUser } = useContext(UserContext)
 
@@ -38,4 +38,4 @@ const Home = () => {
     </div>
   )
 }
-export default Home
+export default Profile
