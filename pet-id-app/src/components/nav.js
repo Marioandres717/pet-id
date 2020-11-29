@@ -16,8 +16,8 @@ const Nav = ({ showModal }) => {
     isLoggedIn && (
       <div className="dashboard-header">
         <nav>
-          <Link to="/dashboard/home" activeClassName="active">
-            See Your home
+          <Link to="/dashboard/profile" activeClassName="active">
+            See Your Profile
           </Link>
           <Link to="/dashboard/pets" activeClassName="active">
             See Your pets
