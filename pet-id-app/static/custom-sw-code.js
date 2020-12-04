@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 self.addEventListener("push", function (e) {
   const options = {
-    body: "This notification was generated from a push!",
+    body: "This notification was generated from a QR Code Scan!",
     icon: "images/example.png",
     vibrate: [100, 50, 100],
     data: {
@@ -17,6 +17,6 @@ self.addEventListener("push", function (e) {
       { action: "close", title: "Close", icon: "images/xmark.png" },
     ],
   }
-  console.log("event: ", e)
-  self.registration.showNotification("Hello world!", options)
+
+  self.registration.showNotification("Your pet was tag was scanne!", options)
 })
