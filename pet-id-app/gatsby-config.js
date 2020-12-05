@@ -27,5 +27,6 @@ module.exports = {
         appendScript: require.resolve(`./static/custom-sw-code.js`),
       },
     },
+    `gatsby-theme-material-ui`,
   ],
 }
