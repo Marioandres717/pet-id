@@ -6,7 +6,7 @@ const Login = ({ showModal }) => {
   const identity = useIdentityContext()
 
   if (identity && identity.isLoggedIn) {
-    navigate("/dashboard/home", { replace: true })
+    navigate("/dashboard/profile", { replace: true })
   }
 
   return (
