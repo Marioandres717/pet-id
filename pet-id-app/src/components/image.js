@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react"
+import React, { Fragment, useState } from "react"
 import { gql, useMutation } from "@apollo/client"
 import { Card, CardMedia } from "@material-ui/core"
 import ImageIcon from "@material-ui/icons/Image"
@@ -37,8 +37,6 @@ const INITIAL_STATE = {
   url: "",
   large_image_url: "",
 }
-
-const inputStyle = { display: "block", margin: "0.5rem" }
 
 const Image = ({ image, onImageUpload }) => {
   const [imageState, setImageState] = useState(image ? image : INITIAL_STATE)
@@ -99,6 +97,7 @@ const Image = ({ image, onImageUpload }) => {
     })
   }
 
+  // eslint-disable-next-line no-unused-vars
   const handleDelete = () => {
     deleteImage({
       variables: {
@@ -123,12 +122,7 @@ const Image = ({ image, onImageUpload }) => {
     <Fragment>
       <label htmlFor="file" style={{ margin: 8 }}>
         Image <ImageIcon color="primary" />
-        <input
-          style={inputStyle}
-          type="file"
-          name="file"
-          onChange={uploadFile}
-        />
+        <input type="file" name="file" onChange={uploadFile} />
       </label>
     </Fragment>
   )

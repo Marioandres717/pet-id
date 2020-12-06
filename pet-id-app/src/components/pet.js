@@ -127,6 +127,7 @@ const Pet = ({ pet }) => {
 
   const handleSubmit = event => {
     event.preventDefault()
+    // eslint-disable-next-line no-unused-vars
     const { avatar, ...pet } = petState
     if (pet.id) {
       updatePet({

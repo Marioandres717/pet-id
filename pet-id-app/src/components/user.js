@@ -60,8 +60,6 @@ const reducer = (state, action) => {
 
 const init = user => (user ? user : INITIAL_STATE)
 
-const inputStyle = { display: "block", margin: "0.5rem" }
-
 const User = ({ user }) => {
   const [userState, dispatch] = useReducer(
     reducer,
@@ -91,8 +89,8 @@ const User = ({ user }) => {
   }
 
   const handleDelete = () => {
-    // deleteUser({ variables: { id: userState.id } })
     alert("deleting user, this is disabled")
+    deleteUser({ variables: { id: userState.id } })
   }
 
   return (

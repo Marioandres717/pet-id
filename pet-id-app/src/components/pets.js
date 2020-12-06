@@ -6,6 +6,7 @@ import {
   ListItemIcon,
   ListItemText,
   Paper,
+  Typography,
 } from "@material-ui/core"
 
 import Pet from "./pet"
@@ -66,6 +67,9 @@ const Pets = ({ pets = [] }) => {
 
       {!selectedPet && (
         <List aria-label="pet list">
+          <Typography style={{ margin: 8 }} variant="h6">
+            Pet List
+          </Typography>
           {pets.map(({ pet }, index) => (
             <PetItem key={pet.id} pet={pet} index={index} />
           ))}
