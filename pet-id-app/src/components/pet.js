@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react"
+import React, { useContext, useEffect, useReducer, useState } from "react"
 import { gql, useMutation } from "@apollo/client"
 
 import { UserContext } from "../hooks/user-context"
@@ -14,6 +14,7 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core"
+import QRCodeGen from "./qrcode-gen"
 
 const CREATE_PET = gql`
   mutation insertPet($input: [user_pets_insert_input!]!) {
@@ -89,6 +90,7 @@ const reducer = (state, action) => {
 const init = pet => (pet ? pet : INITIAL_STATE)
 
 const Pet = ({ pet }) => {
+  const [showQRCode, setShowQRCode] = useState(false)
   const [petState, dispatch] = useReducer(
     reducer,
     pet.id ? pet : INITIAL_STATE,
@@ -234,6 +236,20 @@ const Pet = ({ pet }) => {
           >
             {petState.id ? "Update" : "Create"}
           </Button>
+
+          {petState.uuid && (
+            <>
+              <Button
+                onClick={() => setShowQRCode(true)}
+                style={{ margin: 8 }}
+                variant="contained"
+                type="button"
+              >
+                Generate QR code
+              </Button>
+              {showQRCode && <QRCodeGen data={petState.uuid} />}
+            </>
+          )}
         </div>
       </form>
     </Card>
