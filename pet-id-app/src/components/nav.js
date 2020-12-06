@@ -3,17 +3,13 @@ import { Link } from "gatsby"
 import { useIdentityContext } from "react-netlify-identity"
 
 const Nav = ({ showModal }) => {
-  const identity = useIdentityContext()
-  const isLoggedIn = identity && identity.isLoggedIn
+  const { user, isLoggedIn, isConfirmedUser } = useIdentityContext()
 
-  const name =
-    identity &&
-    identity.user &&
-    identity.user.user_metadata &&
-    identity.user.user_metadata.full_name
+  const name = user && user.user_metadata && user.user_metadata.full_name
 
   return (
-    isLoggedIn && (
+    isLoggedIn &&
+    isConfirmedUser && (
       <div className="dashboard-header">
         <nav>
           <Link to="/dashboard/profile" activeClassName="active">

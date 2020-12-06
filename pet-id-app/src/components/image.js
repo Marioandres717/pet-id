@@ -113,7 +113,7 @@ const Image = ({ image, updateEntity, entityId }) => {
 
   if (imageState.url) {
     return (
-      <Card>
+      <Card style={{ height: 255 }}>
         <CardMedia
           style={{ height: "100%" }}
           image={imageState.url}
