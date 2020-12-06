@@ -84,14 +84,15 @@ const User = ({ user }) => {
   }
   const handleSubmit = event => {
     event.preventDefault()
-    const { name, email, avatar } = userState
+    const { name, email, avatarId } = userState
     updateUser({
-      variables: { id: userState.id, input: { name, email, avatar } },
+      variables: { id: userState.id, input: { name, email, avatarId } },
     })
   }
 
   const handleDelete = () => {
-    deleteUser({ variables: { id: userState.id } })
+    // deleteUser({ variables: { id: userState.id } })
+    alert("deleting user, this is disabled")
   }
 
   return (
@@ -99,7 +100,7 @@ const User = ({ user }) => {
       <form
         style={{
           display: "grid",
-          gridTemplateColumns: "0.5fr 1fr",
+          gridTemplateColumns: "1fr",
           gridTemplateRows: "255px 1fr",
         }}
         action="submit"
@@ -107,8 +108,7 @@ const User = ({ user }) => {
       >
         <Image
           image={userState.avatar}
-          entityId={userState.id}
-          updateEntity={updateUser}
+          onImageUpload={updateFieldValue("avatarId")}
         />
         <div>
           <CardHeader
@@ -142,6 +142,7 @@ const User = ({ user }) => {
 
           <div style={{ display: "flex", justifyContent: "flex-start" }}>
             <Button
+              disabled
               variant="contained"
               color="secondary"
               type="button"

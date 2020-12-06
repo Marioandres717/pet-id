@@ -40,30 +40,26 @@ const INITIAL_STATE = {
 
 const inputStyle = { display: "block", margin: "0.5rem" }
 
-const Image = ({ image, updateEntity, entityId }) => {
+const Image = ({ image, onImageUpload }) => {
   const [imageState, setImageState] = useState(image ? image : INITIAL_STATE)
-  const [addImage, { data }] = useMutation(CREATE_IMAGE, {
+  const [addImage] = useMutation(CREATE_IMAGE, {
     onError: e => console.error("Error", e),
+    onCompleted: e => updateEntity(e),
   })
   const [updateImage] = useMutation(UPDATE_IMAGE, {
     onError: e => console.error("Error", e),
+    onCompleted: e => updateEntity(e),
   })
   const [deleteImage] = useMutation(DELETE_IMAGE, {
     onError: e => console.error("Error", e),
+    onCompleted: e => updateEntity(e),
   })
 
-  useEffect(() => {
-    if (data && !imageState.id) {
-      const { id } = data.insert_images_one
-      updateEntity({
-        variables: {
-          id: entityId,
-          input: { avatarId: id },
-        },
-      })
-      setImageState({ ...imageState, id })
-    }
-  }, [data, updateEntity, entityId, setImageState, imageState])
+  const updateEntity = data => {
+    const { id } = data.insert_images_one
+    onImageUpload({ target: { value: id } })
+    setImageState({ ...imageState, id })
+  }
 
   const uploadFile = async event => {
     const files = event.target.files

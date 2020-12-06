@@ -91,7 +91,7 @@ const init = pet => (pet ? pet : INITIAL_STATE)
 const Pet = ({ pet }) => {
   const [petState, dispatch] = useReducer(
     reducer,
-    pet ? pet : INITIAL_STATE,
+    pet.id ? pet : INITIAL_STATE,
     init
   )
   const { user } = useContext(UserContext)
@@ -168,8 +168,7 @@ const Pet = ({ pet }) => {
       <Image
         style={{ height: 255 }}
         image={petState.avatar}
-        entityId={petState.id}
-        updateEntity={updatePet}
+        onImageUpload={updateFieldValue("avatarId")}
       />
       <form onSubmit={handleSubmit}>
         <TextField
@@ -205,11 +204,11 @@ const Pet = ({ pet }) => {
           <Select
             labelId="specieslabelid"
             id="species"
-            value={petState.species}
+            value={petState.species ? petState.species : 0}
             onChange={updateFieldValue("species")}
             displayEmpty
           >
-            <MenuItem value="">
+            <MenuItem value={0}>
               <em>None</em>
             </MenuItem>
             <MenuItem value={1}>Dog</MenuItem>
