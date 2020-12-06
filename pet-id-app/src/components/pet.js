@@ -125,11 +125,12 @@ const Pet = ({ pet }) => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    if (petState.id) {
+    const { avatar, ...pet } = petState
+    if (pet.id) {
       updatePet({
         variables: {
-          id: petState.id,
-          input: petState,
+          id: pet.id,
+          input: pet,
         },
       })
     } else {
@@ -138,7 +139,7 @@ const Pet = ({ pet }) => {
           input: {
             userId: user.id,
             pet: {
-              data: petState,
+              data: pet,
             },
           },
         },
@@ -163,10 +164,9 @@ const Pet = ({ pet }) => {
 
   return (
     <Card>
-      <CardHeader
-        title={<Typography variant="h6">Pet Info</Typography>}
-      ></CardHeader>
+      <CardHeader title={<Typography variant="h6">Pet Info</Typography>} />
       <Image
+        style={{ height: 255 }}
         image={petState.avatar}
         entityId={petState.id}
         updateEntity={updatePet}
