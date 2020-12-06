@@ -20,6 +20,33 @@ const Pets = ({ pets = [] }) => {
     setSelectedPet(petFields)
   }
 
+  const PetItem = ({ pet = undefined, index = 0 }) =>
+    pet && (
+      <ListItem
+        button
+        divider={index !== pets.length - 1}
+        onClick={onPetSelected(pet)}
+      >
+        <ListItemIcon>
+          <Avatar
+            alt={pet.name}
+            aria-label={pet.name}
+            src={pet.avatar ? pet.avatar.url : null}
+          />
+        </ListItemIcon>
+        <ListItemText primary={pet.name} />
+      </ListItem>
+    )
+
+  const CreatePetItem = () => (
+    <ListItem button onClick={onPetSelected({})}>
+      <ListItemIcon>
+        <Avatar alt="Create Pet" aria-label="Create Pet" src={null} />
+      </ListItemIcon>
+      <ListItemText primary="Create Pet" />
+    </ListItem>
+  )
+
   return (
     <Paper>
       <Breadcrumbs
@@ -40,22 +67,10 @@ const Pets = ({ pets = [] }) => {
       {!selectedPet && (
         <List aria-label="pet list">
           {pets.map(({ pet }, index) => (
-            <ListItem
-              key={pet.id}
-              button
-              divider={index !== pets.length - 1}
-              onClick={onPetSelected(pet)}
-            >
-              <ListItemIcon>
-                <Avatar
-                  alt={pet.name}
-                  aria-label="pet avatar"
-                  src={pet.avatar ? pet.avatar.url : null}
-                />
-              </ListItemIcon>
-              <ListItemText primary={pet.name} />
-            </ListItem>
+            <PetItem key={pet.id} pet={pet} index={index} />
           ))}
+
+          <CreatePetItem />
         </List>
       )}
 
