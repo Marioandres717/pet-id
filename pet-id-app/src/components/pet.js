@@ -2,9 +2,18 @@ import React, { useContext, useEffect, useReducer } from "react"
 import { gql, useMutation } from "@apollo/client"
 
 import { UserContext } from "../hooks/user-context"
-import QRCodeGen from "./qrcode-gen"
 import Image from "./image"
-import Subscription from "./subscription"
+import {
+  Button,
+  Card,
+  CardHeader,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@material-ui/core"
 
 const CREATE_PET = gql`
   mutation insertPet($input: [user_pets_insert_input!]!) {
@@ -79,10 +88,12 @@ const reducer = (state, action) => {
 
 const init = pet => (pet ? pet : INITIAL_STATE)
 
-const inputStyle = { display: "block", margin: "0.5rem" }
-
-const Pet = () => {
-  const [petState, dispatch] = useReducer(reducer, INITIAL_STATE, init)
+const Pet = ({ pet }) => {
+  const [petState, dispatch] = useReducer(
+    reducer,
+    pet ? pet : INITIAL_STATE,
+    init
+  )
   const { user } = useContext(UserContext)
   const [addPet, { data, loading }] = useMutation(CREATE_PET, {
     onError: e => console.error("error", e),
@@ -151,57 +162,82 @@ const Pet = () => {
   if (loading) return <p>Loading...</p>
 
   return (
-    <fieldset>
-      <legend>Pet Information</legend>
+    <Card>
+      <CardHeader
+        title={<Typography variant="h6">Pet Info</Typography>}
+      ></CardHeader>
       <Image
         image={petState.avatar}
         entityId={petState.id}
         updateEntity={updatePet}
       />
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name</label>
-        <input
-          style={inputStyle}
-          type="text"
-          name="name"
+        <TextField
+          id="name"
+          label="Name"
+          style={{ margin: 8 }}
+          placeholder="Enter name"
           value={petState.name}
+          fullWidth
           onChange={updateFieldValue("name")}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
 
-        <label htmlFor="description">Description</label>
-        <input
-          style={inputStyle}
-          type="text"
-          name="description"
+        <TextField
+          id="description"
+          label="Description"
+          style={{ margin: 8 }}
+          placeholder="Enter description"
           value={petState.description}
+          fullWidth
           onChange={updateFieldValue("description")}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
 
-        <label htmlFor="species">Species</label>
-        <select
-          style={inputStyle}
-          type="text"
-          name="species"
-          value={petState.species}
-          onChange={updateFieldValue("species")}
-        >
-          <option value={""}>Select</option>
-          <option value={1}>Dog</option>
-          <option value={2}>Cat</option>
-        </select>
+        <FormControl style={{ margin: 8 }}>
+          <InputLabel shrink id="species">
+            Species
+          </InputLabel>
+          <Select
+            labelId="specieslabelid"
+            id="species"
+            value={petState.species}
+            onChange={updateFieldValue("species")}
+            displayEmpty
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={1}>Dog</MenuItem>
+            <MenuItem value={2}>Cat</MenuItem>
+          </Select>
+        </FormControl>
 
-        <button type="button" onClick={handleDelete}>
-          {petState.id ? "Delete" : "Reset"}
-        </button>
-        <button type="submit">{petState.id ? "Update" : "Create"}</button>
+        <div>
+          <Button
+            style={{ margin: 8 }}
+            variant="contained"
+            color="secondary"
+            type="button"
+            onClick={handleDelete}
+          >
+            {petState.id ? "Delete" : "Reset"}
+          </Button>
+          <Button
+            style={{ margin: 8 }}
+            color="primary"
+            variant="contained"
+            type="submit"
+          >
+            {petState.id ? "Update" : "Create"}
+          </Button>
+        </div>
       </form>
-      <Subscription user={user} />
-      <div>
-        {data && (
-          <QRCodeGen data={data.insert_user_pets.returning[0].pet.uuid} />
-        )}
-      </div>
-    </fieldset>
+    </Card>
   )
 }
 export default Pet

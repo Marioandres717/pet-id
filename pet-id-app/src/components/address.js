@@ -1,9 +1,16 @@
 import React, { useEffect, useReducer } from "react"
 import { gql, useMutation } from "@apollo/client"
+import {
+  Button,
+  Card,
+  CardHeader,
+  TextField,
+  Typography,
+} from "@material-ui/core"
 
 const CREATE_ADDRESS = gql`
-  mutation insertAddress($input: Addresses_insert_input!) {
-    insert_Addresses_one(object: $input) {
+  mutation insertAddress($input: addresses_insert_input!) {
+    insert_addresses_one(object: $input) {
       id
       city
       country
@@ -32,8 +39,8 @@ const UPDATE_USER_ADDRESS_ID = gql`
 `
 
 const UPDATE_ADDRESS = gql`
-  mutation updateAddress($id: Int!, $input: Addresses_set_input!) {
-    update_Addresses_by_pk(pk_columns: { id: $id }, _set: $input) {
+  mutation updateAddress($id: Int!, $input: addresses_set_input!) {
+    update_addresses_by_pk(pk_columns: { id: $id }, _set: $input) {
       id
       country
       line_1
@@ -47,7 +54,7 @@ const UPDATE_ADDRESS = gql`
 
 const DELETE_ADDRESS = gql`
   mutation deleteAddress($id: Int!) {
-    delete_Addresses_by_pk(id: $id) {
+    delete_addresses_by_pk(id: $id) {
       city
       country
       id
@@ -86,8 +93,6 @@ const reducer = (state, action) => {
   }
 }
 
-const inputStyle = { display: "block", margin: "0.5rem" }
-
 const Address = ({ userId, address }) => {
   const [addressState, dispatch] = useReducer(
     reducer,
@@ -109,7 +114,7 @@ const Address = ({ userId, address }) => {
 
   useEffect(() => {
     if (called && !loading && data) {
-      const addressId = data.insert_Addresses_one.id
+      const addressId = data.insert_addresses_one.id
       updateUserAddressId({
         variables: { id: userId, addressId },
       })
@@ -153,85 +158,120 @@ const Address = ({ userId, address }) => {
   }
 
   return (
-    <div>
+    <Card>
+      <CardHeader title={<Typography variant="h6">Contact info</Typography>} />
       <form onSubmit={handleSubmit}>
-        <label htmlFor="phone">Phone</label>
-        <input
-          style={inputStyle}
-          type="text"
-          name="phone"
+        <TextField
+          id="phone"
+          label="phone"
+          style={{ margin: 8 }}
+          placeholder="Enter Phone"
           value={addressState.phone}
+          fullWidth
           onChange={updateFieldValue("phone")}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
-        <label htmlFor="country">country</label>
-        <input
-          style={inputStyle}
-          type="text"
-          name="country"
+
+        <TextField
+          id="country"
+          label="country"
+          style={{ margin: 8 }}
+          placeholder="Enter Country"
           value={addressState.country}
+          fullWidth
           onChange={updateFieldValue("country")}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
 
-        <label htmlFor="line_1">Address Line 1</label>
-        <input
-          style={inputStyle}
-          type="text"
-          name="line_1"
+        <TextField
+          id="line_1"
+          label="line_1"
+          style={{ margin: 8 }}
+          placeholder="Enter Line One"
           value={addressState.line_1}
+          fullWidth
           onChange={updateFieldValue("line_1")}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
 
-        <label htmlFor="city">City</label>
-        <input
-          style={inputStyle}
-          type="text"
-          name="city"
+        <TextField
+          id="city"
+          label="city"
+          style={{ margin: 8 }}
+          placeholder="Enter City"
           value={addressState.city}
+          fullWidth
           onChange={updateFieldValue("city")}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
 
-        <label htmlFor="province_or_state">
-          State/Province/Region <small>(if appropriate)</small>
-        </label>
-        <input
-          style={inputStyle}
-          type="text"
-          name="province_or_state"
+        <TextField
+          id="province_or_state"
+          label="province_or_state"
+          style={{ margin: 8 }}
+          placeholder="Enter province_or_state"
           value={addressState.province_or_state}
+          fullWidth
           onChange={updateFieldValue("province_or_state")}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
 
-        <label htmlFor="zip_or_postcode">Postal Code/ZIP</label>
-        <input
-          style={inputStyle}
-          type="text"
-          name="zip_or_postcode"
+        <TextField
+          id="zip_or_postcode"
+          label="zip_or_postcode"
+          style={{ margin: 8 }}
+          placeholder="Enter zip_or_postcode"
           value={addressState.zip_or_postcode}
+          fullWidth
           onChange={updateFieldValue("zip_or_postcode")}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
 
-        <label htmlFor="other_address_details">Extra Address Details</label>
-        <input
-          style={inputStyle}
-          type="text"
-          name="other_address_details"
+        <TextField
+          id="other_address_details"
+          label="other_address_details"
+          style={{ margin: 8 }}
+          placeholder="Enter other_address_details"
           value={addressState.other_address_details}
+          fullWidth
           onChange={updateFieldValue("other_address_details")}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
 
-        <button
-          style={{ padding: "0.5rem", marginRight: "5px" }}
+        <Button
+          style={{ margin: 8 }}
+          variant="contained"
+          color="secondary"
           type="button"
           onClick={handleDelete}
         >
           {addressState.id ? "Delete" : "Reset "}
-        </button>
+        </Button>
 
-        <button style={{ padding: "0.5rem" }} type="submit">
+        <Button
+          style={{ margin: 8 }}
+          variant="contained"
+          color="primary"
+          type="submit"
+        >
           {addressState.id ? "Update" : "Create "}
-        </button>
+        </Button>
       </form>
-    </div>
+    </Card>
   )
 }
 

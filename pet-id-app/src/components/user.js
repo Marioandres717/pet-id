@@ -1,6 +1,13 @@
 import React, { useReducer } from "react"
 import { gql, useMutation } from "@apollo/client"
 import Image from "./image"
+import {
+  Button,
+  Card,
+  CardHeader,
+  TextField,
+  Typography,
+} from "@material-ui/core"
 
 const UPDATE_USER = gql`
   mutation updateUser($id: Int!, $input: users_set_input!) {
@@ -88,39 +95,73 @@ const User = ({ user }) => {
   }
 
   return (
-    <>
-      <form action="submit" onSubmit={handleSubmit}>
+    <Card>
+      <form
+        style={{
+          display: "grid",
+          gridTemplateColumns: "0.5fr 1fr",
+          gridTemplateRows: "255px 1fr",
+        }}
+        action="submit"
+        onSubmit={handleSubmit}
+      >
         <Image
           image={userState.avatar}
           entityId={userState.id}
           updateEntity={updateUser}
         />
-        <label htmlFor="name">
-          Name
-          <input
-            style={inputStyle}
-            type="text"
-            name="name"
-            value={userState.name}
-            onChange={updateFieldValue("name")}
+        <div>
+          <CardHeader
+            title={<Typography variant="h6">Basic info</Typography>}
           />
-        </label>
-        <label htmlFor="email">
-          Email
-          <input
-            style={inputStyle}
-            type="email"
-            name="email"
+          <TextField
+            id="name"
+            label="Name"
+            style={{ margin: 8 }}
+            placeholder="Enter Name"
+            value={userState.name}
+            fullWidth
+            onChange={updateFieldValue("name")}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+
+          <TextField
+            id="Email"
+            label="Email"
+            style={{ margin: 8 }}
+            placeholder="Enter Email"
             value={userState.email}
             onChange={updateFieldValue("email")}
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
-        </label>
-        <button type="button" onClick={handleDelete}>
-          Delete
-        </button>
-        <button type="submit">Save</button>
+
+          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            <Button
+              variant="contained"
+              color="secondary"
+              type="button"
+              onClick={handleDelete}
+              style={{ margin: 8 }}
+            >
+              Delete
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ margin: 8 }}
+              type="submit"
+            >
+              Save
+            </Button>
+          </div>
+        </div>
       </form>
-    </>
+    </Card>
   )
 }
 

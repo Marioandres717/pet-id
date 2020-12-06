@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { Fragment, useEffect, useState } from "react"
 import { gql, useMutation } from "@apollo/client"
+import { Card, CardMedia } from "@material-ui/core"
+import ImageIcon from "@material-ui/icons/Image"
 
 const CREATE_IMAGE = gql`
   mutation insertImage($input: images_insert_input!) {
@@ -109,31 +111,30 @@ const Image = ({ image, updateEntity, entityId }) => {
     })
   }
 
+  if (imageState.url) {
+    return (
+      <Card>
+        <CardMedia
+          style={{ height: "100%" }}
+          image={imageState.url}
+          title="Profile Image"
+        />
+      </Card>
+    )
+  }
+
   return (
-    <>
-      <label htmlFor="file">
-        File
+    <Fragment>
+      <label htmlFor="file" style={{ margin: 8 }}>
+        Image <ImageIcon color="primary" />
         <input
           style={inputStyle}
           type="file"
           name="file"
           onChange={uploadFile}
         />
-        {/* {userState.avatar && (
-        <img
-          src={userState.avatar}
-          alt="Upload Preview"
-          width="200px"
-          display="block"
-        />
-      )} */}
       </label>
-      {imageState && imageState.id && (
-        <button type="button" onClick={handleDelete}>
-          Delete
-        </button>
-      )}
-    </>
+    </Fragment>
   )
 }
 
