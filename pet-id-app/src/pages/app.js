@@ -1,5 +1,8 @@
 import React, { useEffect } from "react"
 import { gql, useQuery } from "@apollo/client"
+import PetRead from "../components/pet-read"
+import UserRead from "../components/user-read"
+import AddressRead from "../components/address-read"
 
 const PET_BY_UUID = gql`
   query PetsByUuid($uuid: uuid!) {
@@ -68,21 +71,9 @@ const App = ({ location }) => {
     const { address } = user
     return (
       <>
-        <h3>
-          {pet.id} - {pet.uuid}
-        </h3>
-        <p>{pet.name}</p>``
-        <p>{pet.description}</p>
-        <p>{pet.species}</p>
-        <h3>{user.id}</h3>
-        <p>{user.name}</p>
-        <p>
-          {user.email} - {user.phone}
-        </p>
-        <p>{address.id}</p>
-        <p>{address.line_1}</p>
-        <p>{address.city}</p>
-        <p>{address.country}</p>
+        <PetRead pet={pet} disabled={true} />
+        <UserRead user={user} disabled={true} />
+        <AddressRead address={address} disabled={true} />
       </>
     )
   }
