@@ -129,6 +129,11 @@ const Pet = ({ pet, setSelectedPet }) => {
         field: "id",
         value: data.insert_user_pets.returning[0].pet.id,
       })
+      dispatch({
+        type: "updateFieldValue",
+        field: "uuid",
+        value: data.insert_user_pets.returning[0].pet.uuid,
+      })
     }
   }, [data])
 
