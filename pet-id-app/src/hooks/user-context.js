@@ -56,4 +56,4 @@ const UserProvider = ({ children }) => {
   )
 }
 
-export { UserContext, UserProvider }
+export { UserContext, UserProvider, USER_BY_AUTH_ID }

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useReducer, useState } from "react"
 import { gql, useMutation } from "@apollo/client"
 
-import { UserContext } from "../hooks/user-context"
+import { UserContext, USER_BY_AUTH_ID } from "../hooks/user-context"
 import Image from "./image"
 import {
   Button,
@@ -15,6 +15,7 @@ import {
   Typography,
 } from "@material-ui/core"
 import QRCodeGen from "./qrcode-gen"
+import { useIdentityContext } from "react-netlify-identity"
 
 const CREATE_PET = gql`
   mutation insertPet($input: [user_pets_insert_input!]!) {
@@ -90,6 +91,7 @@ const reducer = (state, action) => {
 const init = pet => (pet ? pet : INITIAL_STATE)
 
 const Pet = ({ pet }) => {
+  const { user: netlifyUser } = useIdentityContext()
   const [showQRCode, setShowQRCode] = useState(false)
   const [petState, dispatch] = useReducer(
     reducer,
@@ -99,12 +101,24 @@ const Pet = ({ pet }) => {
   const { user } = useContext(UserContext)
   const [addPet, { data, loading }] = useMutation(CREATE_PET, {
     onError: e => console.error("error", e),
+    refetchQueries: [
+      {
+        query: USER_BY_AUTH_ID,
+        variables: { authId: netlifyUser.id },
+      },
+    ],
   })
   const [updatePet] = useMutation(UPDATE_PET, {
     onError: e => console.error("error", e),
   })
   const [deletePet] = useMutation(DELETE_PET, {
     onError: e => console.error("error", e),
+    refetchQueries: [
+      {
+        query: USER_BY_AUTH_ID,
+        variables: { authId: netlifyUser.id },
+      },
+    ],
   })
 
   useEffect(() => {
