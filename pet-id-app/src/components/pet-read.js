@@ -34,7 +34,7 @@ export default function PetRead({ pet, disabled = false }) {
       <CardHeader title={<Typography variant="h6">Pet info</Typography>} />
       <CardMedia
         className={classes.media}
-        image={pet.avatar.url}
+        image={pet.avatar && pet.avatar.url}
         title="Paella dish"
       />
       <CardContent>

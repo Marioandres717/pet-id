@@ -36,7 +36,7 @@ export default function UserRead({ user, disabled = false }) {
               alt="user-name"
               aria-label="user avatar"
               className={classes.avatar}
-              src={user.avatar.url}
+              src={user.avatar && user.avatar.url}
             />
           </ListItem>
           <Divider />
