@@ -78,7 +78,7 @@ const Pets = ({ pets = [] }) => {
         </List>
       )}
 
-      {selectedPet && <Pet pet={selectedPet} />}
+      {selectedPet && <Pet pet={selectedPet} setSelectedPet={setSelectedPet} />}
     </Paper>
   )
 }

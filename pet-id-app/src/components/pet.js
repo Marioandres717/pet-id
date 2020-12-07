@@ -90,7 +90,7 @@ const reducer = (state, action) => {
 
 const init = pet => (pet ? pet : INITIAL_STATE)
 
-const Pet = ({ pet }) => {
+const Pet = ({ pet, setSelectedPet }) => {
   const { user: netlifyUser } = useIdentityContext()
   const [showQRCode, setShowQRCode] = useState(false)
   const [petState, dispatch] = useReducer(
@@ -113,6 +113,7 @@ const Pet = ({ pet }) => {
   })
   const [deletePet] = useMutation(DELETE_PET, {
     onError: e => console.error("error", e),
+    onCompleted: () => setSelectedPet(null),
     refetchQueries: [
       {
         query: USER_BY_AUTH_ID,
