@@ -2,7 +2,7 @@ import React from "react"
 import Address from "./address"
 import User from "./user"
 
-const Profile = ({ user }) => {
+const Profile = ({ user = {} }) => {
   return (
     <>
       <User user={user} />
