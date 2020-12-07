@@ -18,6 +18,14 @@ module.exports = {
         theme_color: "#6b37bf",
         display: "standalone",
         icon: "src/images/icon.png",
+        icons: [
+          {
+            src: "src/images/icon.png",
+            sizes: "196x196",
+            type: "image/png",
+            purpose: "any maskable",
+          },
+        ],
         crossOrigin: "use-credentials",
       },
     },
