@@ -48,7 +48,7 @@ const App = ({ location }) => {
   })
 
   useEffect(() => {
-    if (!loading && !error && data) {
+    if (!loading && !error && data && data.pets.length) {
       const [pet] = data && data.pets
       // eslint-disable-next-line no-undef
       fetch(`${process.env.GATSBY_NETLIFY_URL}/api/notify-user`, {
