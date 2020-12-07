@@ -63,7 +63,7 @@ const App = ({ location }) => {
   }, [loading, error, data])
 
   if (loading) return <p>LOADING....</p>
-  if (error) return <p>Error</p>
+  if (error) return <h1>NOTHING FOUND</h1>
 
   if (data.pets.length) {
     const [pet] = data.pets
