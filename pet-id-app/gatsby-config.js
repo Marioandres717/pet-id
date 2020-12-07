@@ -25,6 +25,11 @@ module.exports = {
             type: "image/png",
             purpose: "any maskable",
           },
+          {
+            src: "src/images/icon.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
         ],
         crossOrigin: "use-credentials",
       },
