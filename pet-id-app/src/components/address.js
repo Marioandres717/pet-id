@@ -163,7 +163,7 @@ const Address = ({ userId, address }) => {
       <form onSubmit={handleSubmit}>
         <TextField
           id="phone"
-          label="phone"
+          label="Phone"
           style={{ margin: 8 }}
           placeholder="Enter Phone"
           value={addressState.phone}
@@ -176,7 +176,7 @@ const Address = ({ userId, address }) => {
 
         <TextField
           id="country"
-          label="country"
+          label="Country"
           style={{ margin: 8 }}
           placeholder="Enter Country"
           value={addressState.country}
@@ -185,11 +185,13 @@ const Address = ({ userId, address }) => {
           InputLabelProps={{
             shrink: true,
           }}
+          error={addressState.country ? false : true}
+          helperText={addressState.country ? null : "Required Field"}
         />
 
         <TextField
           id="line_1"
-          label="line_1"
+          label="Line 1"
           style={{ margin: 8 }}
           placeholder="Enter Line One"
           value={addressState.line_1}
@@ -198,11 +200,13 @@ const Address = ({ userId, address }) => {
           InputLabelProps={{
             shrink: true,
           }}
+          error={addressState.line_1 ? false : true}
+          helperText={addressState.line_1 ? null : "Required Field"}
         />
 
         <TextField
           id="city"
-          label="city"
+          label="City"
           style={{ margin: 8 }}
           placeholder="Enter City"
           value={addressState.city}
@@ -211,32 +215,38 @@ const Address = ({ userId, address }) => {
           InputLabelProps={{
             shrink: true,
           }}
+          error={addressState.city ? false : true}
+          helperText={addressState.city ? null : "Required Field"}
         />
 
         <TextField
           id="province_or_state"
-          label="province_or_state"
+          label="Province or State"
           style={{ margin: 8 }}
-          placeholder="Enter province_or_state"
+          placeholder="Enter province or state"
           value={addressState.province_or_state}
           fullWidth
           onChange={updateFieldValue("province_or_state")}
           InputLabelProps={{
             shrink: true,
           }}
+          error={addressState.province_or_state ? false : true}
+          helperText={addressState.province_or_state ? null : "Required Field"}
         />
 
         <TextField
           id="zip_or_postcode"
-          label="zip_or_postcode"
+          label="Zip or Postcode"
           style={{ margin: 8 }}
-          placeholder="Enter zip_or_postcode"
+          placeholder="Enter zip or postcode"
           value={addressState.zip_or_postcode}
           fullWidth
           onChange={updateFieldValue("zip_or_postcode")}
           InputLabelProps={{
             shrink: true,
           }}
+          error={addressState.zip_or_postcode ? false : true}
+          helperText={addressState.zip_or_postcode ? null : "Required Field"}
         />
 
         <TextField

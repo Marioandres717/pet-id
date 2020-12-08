@@ -136,6 +136,7 @@ const User = ({ user }) => {
             InputLabelProps={{
               shrink: true,
             }}
+            disabled
           />
 
           <div style={{ display: "flex", justifyContent: "flex-start" }}>
