@@ -121,8 +121,13 @@ const Image = ({ image, onImageUpload }) => {
   return (
     <Fragment>
       <label htmlFor="file" style={{ margin: 8 }}>
-        Image <ImageIcon color="primary" />
-        <input type="file" name="file" onChange={uploadFile} />
+        Avatar
+        <input
+          style={{ marginLeft: 5 }}
+          type="file"
+          name="file"
+          onChange={uploadFile}
+        />
       </label>
     </Fragment>
   )

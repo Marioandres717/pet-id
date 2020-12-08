@@ -205,6 +205,8 @@ const Pet = ({ pet, setSelectedPet }) => {
           InputLabelProps={{
             shrink: true,
           }}
+          error={petState.name ? false : true}
+          helperText={petState.name ? null : "Required Field"}
         />
 
         <TextField
