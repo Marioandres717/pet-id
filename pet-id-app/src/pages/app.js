@@ -48,6 +48,7 @@ const App = ({ location }) => {
   })
 
   useEffect(() => {
+    // this could be refactor by fetching the user browser
     if (!loading && !error && data && data.pets.length) {
       const [pet] = data && data.pets
       // eslint-disable-next-line no-undef
