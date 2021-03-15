@@ -148,10 +148,10 @@ unique or primary key constraints on table "addresses"
 """
 enum addresses_constraint {
   """unique or primary key constraint"""
-  Addresses_pkey
+  addresses_pkey
 
   """unique or primary key constraint"""
-  Addresses_userId_key
+  addresses_userId_key
 }
 
 """

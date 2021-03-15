@@ -3,17 +3,15 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { PetSpeciesService } from './pet-species/pet-species.service';
 
 @Module({
   imports: [
     GraphQLModule.forRoot({
-      typePaths: ['./**/*.graphql'],
-      definitions: {
-        path: join(process.cwd(), 'src/graphql.ts'),
-      }
+      typePaths: ['./**/*.graphql']
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PetSpeciesService],
 })
 export class AppModule {}
