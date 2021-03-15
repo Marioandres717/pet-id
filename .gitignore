@@ -2,6 +2,9 @@
 .netlify
 .DS_Store
 
+# nestjs
+dist/
+
 # Logs
 logs
 *.log
