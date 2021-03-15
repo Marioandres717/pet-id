@@ -1,2 +1,2 @@
 # pet-id
-CS476 Project
+CS475 Project
