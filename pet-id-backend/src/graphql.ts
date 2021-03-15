@@ -1383,7 +1383,7 @@ export interface Mutation_root {
 export interface Pet_species {
     id: number;
     pets: Pets[];
-    Pets_aggregate: Pets_aggregate;
+    pets_aggregate: Pets_aggregate;
     type: string;
 }
 
@@ -1459,7 +1459,7 @@ export interface Pets {
     description?: string;
     id: number;
     name: string;
-    pet_specy: Pet_species;
+    pet_species: Pet_species;
     species: number;
     user_pets: User_pets[];
     User_Pets_aggregate: User_Pets_aggregate;
@@ -1557,24 +1557,24 @@ export interface Pets_variance_fields {
 }
 
 export interface Query_root {
-    Addresses: Addresses[];
-    Addresses_aggregate: Addresses_aggregate;
-    Addresses_by_pk?: Addresses;
+    addresses: Addresses[];
+    addresses_aggregate: Addresses_aggregate;
+    addresses_by_pk?: Addresses;
     images: Images[];
-    Images_aggregate: Images_aggregate;
-    Images_by_pk?: Images;
+    images_aggregate: Images_aggregate;
+    images_by_pk?: Images;
     pet_species: Pet_species[];
-    Pet_species_aggregate: Pet_species_aggregate;
-    Pet_species_by_pk?: Pet_species;
+    pet_species_aggregate: Pet_species_aggregate;
+    pet_species_by_pk?: Pet_species;
     pets: Pets[];
-    Pets_aggregate: Pets_aggregate;
-    Pets_by_pk?: Pets;
+    pets_aggregate: Pets_aggregate;
+    pets_by_pk?: Pets;
     user_browsers: User_browsers[];
-    User_browsers_aggregate: User_browsers_aggregate;
-    User_browsers_by_pk?: User_browsers;
+    user_browsers_aggregate: User_browsers_aggregate;
+    user_browsers_by_pk?: User_browsers;
     user_pets: User_pets[];
-    User_Pets_aggregate: User_Pets_aggregate;
-    User_Pets_by_pk?: User_pets;
+    user_Pets_aggregate: User_Pets_aggregate;
+    user_Pets_by_pk?: User_pets;
     users: Users[];
     users_aggregate: Users_aggregate;
     users_by_pk?: Users;
