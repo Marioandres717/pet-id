@@ -1,14 +1,20 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Pet_species } from 'src/graphql';
-import { petSpecies } from './repository/fixtures/pet-species';
+import { Repository } from 'typeorm';
+import { PetSpecies } from './pet-species.entity';
 
 @Injectable()
 export class PetSpeciesService {
-    private readonly petSpecies = [petSpecies, {...petSpecies, id: 2}]
-    findAll(): Pet_species[] {
-        return this.petSpecies
-    }
-    findOne(id: number): Pet_species {
-        return this.petSpecies.filter(species => species.id === id)[0]
-    }
+  constructor(
+    @InjectRepository(PetSpecies)
+    private petSpeciesRepository: Repository<PetSpecies>,
+  ) {}
+
+  findAll(): Promise<Pet_species[]> {
+    return this.petSpeciesRepository.find();
+  }
+  findOne(id: number): Promise<Pet_species> {
+    return this.petSpeciesRepository.findOne(id);
+  }
 }
