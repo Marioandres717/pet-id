@@ -1,19 +1,21 @@
+import { QueryBus } from '@nestjs/cqrs';
 import { Args, ResolveField, Resolver } from '@nestjs/graphql';
 import {
   Pet_species_bool_exp,
   Pet_species_order_by,
   Pet_species_select_column,
 } from 'src/graphql';
-import { PetSpecies } from './pet-species.entity';
-import { PetSpeciesService } from './pet-species.service';
+import * as clc from 'cli-color';
+import { GetAllPetSpeciesQuery, GetPetSpeciesQuery } from './queries/impl';
+import { PetSpecies } from './repository/pet-species.entity';
 
 @Resolver('query_root')
 export class PetSpeciesResolver {
-  constructor(private petSpeciesService: PetSpeciesService) {}
+  constructor(private readonly queryBus: QueryBus) {}
 
   @ResolveField()
   async pet_species_by_pk(@Args('id') id: number): Promise<PetSpecies> {
-    return this.petSpeciesService.findOne(id);
+    return this.queryBus.execute(new GetPetSpeciesQuery(id));
   }
 
   @ResolveField()
@@ -24,6 +26,7 @@ export class PetSpeciesResolver {
     @Args('order_by') order_by?: Pet_species_order_by,
     @Args('where') where?: Pet_species_bool_exp,
   ): Promise<PetSpecies[]> {
-    return this.petSpeciesService.findAll();
+    console.log(clc.greenBright('pet-species-resolver-get-pet-species...'));
+    return this.queryBus.execute(new GetAllPetSpeciesQuery());
   }
 }
