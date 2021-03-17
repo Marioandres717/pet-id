@@ -16,6 +16,7 @@ import { PetSpeciesModule } from './pet-species/pet-species.module';
       database: 'pet_id',
       synchronize: true,
       autoLoadEntities: true,
+      keepConnectionAlive: true,
     }),
     GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql'],
