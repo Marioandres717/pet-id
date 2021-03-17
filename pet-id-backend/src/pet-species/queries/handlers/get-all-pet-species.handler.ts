@@ -9,7 +9,6 @@ export class GetAllPetSpeciesHandler
   constructor(private readonly repository: PetSpeciesService) {}
 
   async execute(query: GetAllPetSpeciesQuery) {
-    console.log(clc.greenBright('get-pet-species-handler...'));
     return await this.repository.findAll();
   }
 }

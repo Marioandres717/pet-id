@@ -7,15 +7,17 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { QueryHandlers } from './queries/handlers';
 import { PetSpeciesMutationResolver } from './pet-species.mutation.resolver';
 import { CommandHandlers } from './commands/handlers';
+import { EventHandlers } from './events/handlers';
 
 @Module({
   imports: [CqrsModule, TypeOrmModule.forFeature([PetSpecies])],
   providers: [
     PetSpeciesQueryResolver,
     PetSpeciesMutationResolver,
-    PetSpeciesService,
     ...QueryHandlers,
     ...CommandHandlers,
+    ...EventHandlers,
+    PetSpeciesService,
   ],
 })
 export class PetSpeciesModule {}

@@ -7,6 +7,6 @@ export class GetPetSpeciesHandler implements IQueryHandler<GetPetSpeciesQuery> {
   constructor(private readonly repository: PetSpeciesService) {}
   async execute(query: GetPetSpeciesQuery): Promise<any> {
     const { id } = query;
-    return this.repository.findOne(id);
+    return this.repository.findOneById(id);
   }
 }

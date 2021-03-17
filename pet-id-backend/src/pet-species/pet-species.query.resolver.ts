@@ -1,10 +1,5 @@
 import { QueryBus } from '@nestjs/cqrs';
 import { Args, ResolveField, Resolver } from '@nestjs/graphql';
-import {
-  Pet_species_bool_exp,
-  Pet_species_order_by,
-  Pet_species_select_column,
-} from 'src/graphql';
 import * as clc from 'cli-color';
 import { GetAllPetSpeciesQuery, GetPetSpeciesQuery } from './queries/impl';
 import { PetSpecies } from './repository/pet-species.entity';
@@ -19,14 +14,7 @@ export class PetSpeciesQueryResolver {
   }
 
   @ResolveField()
-  async pet_species(
-    @Args('distinct_on') distinct_on?: Pet_species_select_column[],
-    @Args('limit') limit?: number,
-    @Args('offset') offset?: number,
-    @Args('order_by') order_by?: Pet_species_order_by,
-    @Args('where') where?: Pet_species_bool_exp,
-  ): Promise<PetSpecies[]> {
-    console.log(clc.greenBright('pet-species-resolver-get-pet-species...'));
+  async pet_species(): Promise<PetSpecies[]> {
     return this.queryBus.execute(new GetAllPetSpeciesQuery());
   }
 }

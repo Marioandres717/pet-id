@@ -7,16 +7,17 @@ import { PetSpecies } from './pet-species.entity';
 export class PetSpeciesService {
   constructor(
     @InjectRepository(PetSpecies)
-    private petSpeciesRepository: Repository<PetSpecies>,
+    private repository: Repository<PetSpecies>,
   ) {}
 
-  async createOnePetSpecies(type: string): Promise<PetSpecies> {
-    return await this.petSpeciesRepository.save({ type });
+  create(type: string) {
+    const petSpecies = this.repository.create({ type });
+    return this.repository.save(petSpecies);
   }
-  findAll(): Promise<PetSpecies[]> {
-    return this.petSpeciesRepository.find();
+  findAll() {
+    return this.repository.find();
   }
-  findOne(id: number): Promise<PetSpecies> {
-    return this.petSpeciesRepository.findOne(id);
+  findOneById(id: number) {
+    return this.repository.findOne(id);
   }
 }

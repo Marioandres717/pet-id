@@ -10,8 +10,13 @@ export class CreateOnePetSpeciesHandler
     private readonly publisher: EventPublisher,
   ) {}
 
-  execute(command: CreateOnePetSpeciesCommand) {
+  async execute(command: CreateOnePetSpeciesCommand) {
     const { type } = command;
-    return this.repository.createOnePetSpecies(type);
+    const petSpecies = this.publisher.mergeObjectContext(
+      await this.repository.create(type),
+    );
+    petSpecies.petSpeciesCreated();
+    petSpecies.commit();
+    return petSpecies;
   }
 }
