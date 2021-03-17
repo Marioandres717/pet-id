@@ -1,3 +1,3 @@
 export class GetPetSpeciesQuery {
-  constructor(public id: number) {}
+  constructor(readonly id: number) {}
 }

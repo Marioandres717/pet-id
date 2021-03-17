@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Pet_species, Pet_species_insert_input } from 'src/graphql';
 import { Repository } from 'typeorm';
 import { PetSpecies } from './pet-species.entity';
 
@@ -11,17 +10,13 @@ export class PetSpeciesService {
     private petSpeciesRepository: Repository<PetSpecies>,
   ) {}
 
-  async createPetSpecies(
-    petSpeciesDto: Pet_species_insert_input,
-  ): Promise<Pet_species[]> {
-    const { type } = petSpeciesDto;
-    const petSpecies = await this.petSpeciesRepository.create({ type });
-    return [petSpecies];
+  async createOnePetSpecies(type: string): Promise<PetSpecies> {
+    return await this.petSpeciesRepository.save({ type });
   }
-  findAll(): Promise<Pet_species[]> {
+  findAll(): Promise<PetSpecies[]> {
     return this.petSpeciesRepository.find();
   }
-  findOne(id: number): Promise<Pet_species> {
+  findOne(id: number): Promise<PetSpecies> {
     return this.petSpeciesRepository.findOne(id);
   }
 }

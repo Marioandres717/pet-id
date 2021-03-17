@@ -1,12 +1,12 @@
 import { Pets, Pets_aggregate, Pet_species } from 'src/graphql';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class PetSpecies implements Pet_species {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   type: string;
 
   pets: Pets[];

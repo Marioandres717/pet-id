@@ -10,7 +10,7 @@ import { GetAllPetSpeciesQuery, GetPetSpeciesQuery } from './queries/impl';
 import { PetSpecies } from './repository/pet-species.entity';
 
 @Resolver('query_root')
-export class PetSpeciesResolver {
+export class PetSpeciesQueryResolver {
   constructor(private readonly queryBus: QueryBus) {}
 
   @ResolveField()
