@@ -8,7 +8,7 @@ export class PetSpeciesCreatedHandler
   handle(event: PetSpeciesCreatedEvent) {
     const ts = Date.now();
     console.log(
-      clc.green('[EVENT] Pet Species Created', Math.floor(ts / 1000)),
+      clc.green('[EVENT] PET SPECIES CREATED', Math.floor(ts / 1000)),
     );
   }
 }
