@@ -20,7 +20,9 @@ Export this locally resolved field as a variable to be used in the remainder of 
 https://www.apollographql.com/docs/react/essentials/local-state/#using-client-fields-as-variables
 """
 directive @export(
-  """The variable name to export this field as."""
+  """
+  The variable name to export this field as.
+  """
   as: String!
 ) on FIELD
 
@@ -29,7 +31,9 @@ Specify a custom store key for this result. See
 https://www.apollographql.com/docs/react/advanced/caching/#the-connection-directive
 """
 directive @connection(
-  """Specify the store key."""
+  """
+  Specify the store key.
+  """
   key: String!
 
   """
@@ -50,10 +54,14 @@ type addresses {
   phone: String
   province_or_state: String!
 
-  """An object relationship"""
+  """
+  An object relationship
+  """
   user: users!
 
-  """An object relationship"""
+  """
+  An object relationship
+  """
   userById: users
   userId: Int!
   zip_or_postcode: String!
@@ -109,7 +117,9 @@ input addresses_arr_rel_insert_input {
   on_conflict: addresses_on_conflict
 }
 
-"""aggregate avg on columns"""
+"""
+aggregate avg on columns
+"""
 type addresses_avg_fields {
   id: Float
   userId: Float
@@ -147,10 +157,14 @@ input addresses_bool_exp {
 unique or primary key constraints on table "addresses"
 """
 enum addresses_constraint {
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   addresses_pkey
 
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   addresses_userId_key
 }
 
@@ -179,7 +193,9 @@ input addresses_insert_input {
   zip_or_postcode: String
 }
 
-"""aggregate max on columns"""
+"""
+aggregate max on columns
+"""
 type addresses_max_fields {
   city: String
   country: String
@@ -207,7 +223,9 @@ input addresses_max_order_by {
   zip_or_postcode: order_by
 }
 
-"""aggregate min on columns"""
+"""
+aggregate min on columns
+"""
 type addresses_min_fields {
   city: String
   country: String
@@ -239,10 +257,14 @@ input addresses_min_order_by {
 response of any mutation on the table "addresses"
 """
 type addresses_mutation_response {
-  """number of affected rows by the mutation"""
+  """
+  number of affected rows by the mutation
+  """
   affected_rows: Int!
 
-  """data of the affected rows by the mutation"""
+  """
+  data of the affected rows by the mutation
+  """
   returning: [addresses!]!
 }
 
@@ -291,31 +313,49 @@ input addresses_pk_columns_input {
 select columns of table "addresses"
 """
 enum addresses_select_column {
-  """column name"""
+  """
+  column name
+  """
   city
 
-  """column name"""
+  """
+  column name
+  """
   country
 
-  """column name"""
+  """
+  column name
+  """
   id
 
-  """column name"""
+  """
+  column name
+  """
   line_1
 
-  """column name"""
+  """
+  column name
+  """
   other_address_details
 
-  """column name"""
+  """
+  column name
+  """
   phone
 
-  """column name"""
+  """
+  column name
+  """
   province_or_state
 
-  """column name"""
+  """
+  column name
+  """
   userId
 
-  """column name"""
+  """
+  column name
+  """
   zip_or_postcode
 }
 
@@ -334,7 +374,9 @@ input addresses_set_input {
   zip_or_postcode: String
 }
 
-"""aggregate stddev on columns"""
+"""
+aggregate stddev on columns
+"""
 type addresses_stddev_fields {
   id: Float
   userId: Float
@@ -348,7 +390,9 @@ input addresses_stddev_order_by {
   userId: order_by
 }
 
-"""aggregate stddev_pop on columns"""
+"""
+aggregate stddev_pop on columns
+"""
 type addresses_stddev_pop_fields {
   id: Float
   userId: Float
@@ -362,7 +406,9 @@ input addresses_stddev_pop_order_by {
   userId: order_by
 }
 
-"""aggregate stddev_samp on columns"""
+"""
+aggregate stddev_samp on columns
+"""
 type addresses_stddev_samp_fields {
   id: Float
   userId: Float
@@ -376,7 +422,9 @@ input addresses_stddev_samp_order_by {
   userId: order_by
 }
 
-"""aggregate sum on columns"""
+"""
+aggregate sum on columns
+"""
 type addresses_sum_fields {
   id: Int
   userId: Int
@@ -394,35 +442,55 @@ input addresses_sum_order_by {
 update columns of table "addresses"
 """
 enum addresses_update_column {
-  """column name"""
+  """
+  column name
+  """
   city
 
-  """column name"""
+  """
+  column name
+  """
   country
 
-  """column name"""
+  """
+  column name
+  """
   id
 
-  """column name"""
+  """
+  column name
+  """
   line_1
 
-  """column name"""
+  """
+  column name
+  """
   other_address_details
 
-  """column name"""
+  """
+  column name
+  """
   phone
 
-  """column name"""
+  """
+  column name
+  """
   province_or_state
 
-  """column name"""
+  """
+  column name
+  """
   userId
 
-  """column name"""
+  """
+  column name
+  """
   zip_or_postcode
 }
 
-"""aggregate var_pop on columns"""
+"""
+aggregate var_pop on columns
+"""
 type addresses_var_pop_fields {
   id: Float
   userId: Float
@@ -436,7 +504,9 @@ input addresses_var_pop_order_by {
   userId: order_by
 }
 
-"""aggregate var_samp on columns"""
+"""
+aggregate var_samp on columns
+"""
 type addresses_var_samp_fields {
   id: Float
   userId: Float
@@ -450,7 +520,9 @@ input addresses_var_samp_order_by {
   userId: order_by
 }
 
-"""aggregate variance on columns"""
+"""
+aggregate variance on columns
+"""
 type addresses_variance_fields {
   id: Float
   userId: Float
@@ -471,76 +543,124 @@ type images {
   id: Int!
   large_image_url: String
 
-  """An array relationship"""
+  """
+  An array relationship
+  """
   pets(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: pets_bool_exp
   ): [pets!]!
 
-  """An aggregated array relationship"""
+  """
+  An aggregated array relationship
+  """
   pets_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: pets_bool_exp
   ): pets_aggregate!
   url: String!
 
-  """An array relationship"""
+  """
+  An array relationship
+  """
   users(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [users_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [users_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: users_bool_exp
   ): [users!]!
 
-  """An aggregated array relationship"""
+  """
+  An aggregated array relationship
+  """
   users_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [users_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [users_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: users_bool_exp
   ): users_aggregate!
 }
@@ -595,7 +715,9 @@ input images_arr_rel_insert_input {
   on_conflict: images_on_conflict
 }
 
-"""aggregate avg on columns"""
+"""
+aggregate avg on columns
+"""
 type images_avg_fields {
   id: Float
 }
@@ -625,7 +747,9 @@ input images_bool_exp {
 unique or primary key constraints on table "images"
 """
 enum images_constraint {
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   images_pkey
 }
 
@@ -647,7 +771,9 @@ input images_insert_input {
   users: users_arr_rel_insert_input
 }
 
-"""aggregate max on columns"""
+"""
+aggregate max on columns
+"""
 type images_max_fields {
   id: Int
   large_image_url: String
@@ -663,7 +789,9 @@ input images_max_order_by {
   url: order_by
 }
 
-"""aggregate min on columns"""
+"""
+aggregate min on columns
+"""
 type images_min_fields {
   id: Int
   large_image_url: String
@@ -683,10 +811,14 @@ input images_min_order_by {
 response of any mutation on the table "images"
 """
 type images_mutation_response {
-  """number of affected rows by the mutation"""
+  """
+  number of affected rows by the mutation
+  """
   affected_rows: Int!
 
-  """data of the affected rows by the mutation"""
+  """
+  data of the affected rows by the mutation
+  """
   returning: [images!]!
 }
 
@@ -729,13 +861,19 @@ input images_pk_columns_input {
 select columns of table "images"
 """
 enum images_select_column {
-  """column name"""
+  """
+  column name
+  """
   id
 
-  """column name"""
+  """
+  column name
+  """
   large_image_url
 
-  """column name"""
+  """
+  column name
+  """
   url
 }
 
@@ -748,7 +886,9 @@ input images_set_input {
   url: String
 }
 
-"""aggregate stddev on columns"""
+"""
+aggregate stddev on columns
+"""
 type images_stddev_fields {
   id: Float
 }
@@ -760,7 +900,9 @@ input images_stddev_order_by {
   id: order_by
 }
 
-"""aggregate stddev_pop on columns"""
+"""
+aggregate stddev_pop on columns
+"""
 type images_stddev_pop_fields {
   id: Float
 }
@@ -772,7 +914,9 @@ input images_stddev_pop_order_by {
   id: order_by
 }
 
-"""aggregate stddev_samp on columns"""
+"""
+aggregate stddev_samp on columns
+"""
 type images_stddev_samp_fields {
   id: Float
 }
@@ -784,7 +928,9 @@ input images_stddev_samp_order_by {
   id: order_by
 }
 
-"""aggregate sum on columns"""
+"""
+aggregate sum on columns
+"""
 type images_sum_fields {
   id: Int
 }
@@ -800,17 +946,25 @@ input images_sum_order_by {
 update columns of table "images"
 """
 enum images_update_column {
-  """column name"""
+  """
+  column name
+  """
   id
 
-  """column name"""
+  """
+  column name
+  """
   large_image_url
 
-  """column name"""
+  """
+  column name
+  """
   url
 }
 
-"""aggregate var_pop on columns"""
+"""
+aggregate var_pop on columns
+"""
 type images_var_pop_fields {
   id: Float
 }
@@ -822,7 +976,9 @@ input images_var_pop_order_by {
   id: order_by
 }
 
-"""aggregate var_samp on columns"""
+"""
+aggregate var_samp on columns
+"""
 type images_var_samp_fields {
   id: Float
 }
@@ -834,7 +990,9 @@ input images_var_samp_order_by {
   id: order_by
 }
 
-"""aggregate variance on columns"""
+"""
+aggregate variance on columns
+"""
 type images_variance_fields {
   id: Float
 }
@@ -878,13 +1036,17 @@ input json_comparison_exp {
   _nin: [json!]
 }
 
-"""mutation root"""
+"""
+mutation root
+"""
 type mutation_root {
   """
   delete data from the table: "addresses"
   """
   delete_addresses(
-    """filter the rows which have to be deleted"""
+    """
+    filter the rows which have to be deleted
+    """
     where: addresses_bool_exp!
   ): addresses_mutation_response
 
@@ -897,7 +1059,9 @@ type mutation_root {
   delete data from the table: "images"
   """
   delete_images(
-    """filter the rows which have to be deleted"""
+    """
+    filter the rows which have to be deleted
+    """
     where: images_bool_exp!
   ): images_mutation_response
 
@@ -910,7 +1074,9 @@ type mutation_root {
   delete data from the table: "pet_species"
   """
   delete_pet_species(
-    """filter the rows which have to be deleted"""
+    """
+    filter the rows which have to be deleted
+    """
     where: pet_species_bool_exp!
   ): pet_species_mutation_response
 
@@ -923,7 +1089,9 @@ type mutation_root {
   delete data from the table: "pets"
   """
   delete_pets(
-    """filter the rows which have to be deleted"""
+    """
+    filter the rows which have to be deleted
+    """
     where: pets_bool_exp!
   ): pets_mutation_response
 
@@ -936,7 +1104,9 @@ type mutation_root {
   delete data from the table: "user_browsers"
   """
   delete_user_browsers(
-    """filter the rows which have to be deleted"""
+    """
+    filter the rows which have to be deleted
+    """
     where: user_browsers_bool_exp!
   ): user_browsers_mutation_response
 
@@ -949,7 +1119,9 @@ type mutation_root {
   delete data from the table: "user_pets"
   """
   delete_user_pets(
-    """filter the rows which have to be deleted"""
+    """
+    filter the rows which have to be deleted
+    """
     where: user_pets_bool_exp!
   ): user_pets_mutation_response
 
@@ -962,7 +1134,9 @@ type mutation_root {
   delete data from the table: "users"
   """
   delete_users(
-    """filter the rows which have to be deleted"""
+    """
+    filter the rows which have to be deleted
+    """
     where: users_bool_exp!
   ): users_mutation_response
 
@@ -975,10 +1149,14 @@ type mutation_root {
   insert data into the table: "addresses"
   """
   insert_addresses(
-    """the rows to be inserted"""
+    """
+    the rows to be inserted
+    """
     objects: [addresses_insert_input!]!
 
-    """on conflict condition"""
+    """
+    on conflict condition
+    """
     on_conflict: addresses_on_conflict
   ): addresses_mutation_response
 
@@ -986,10 +1164,14 @@ type mutation_root {
   insert a single row into the table: "addresses"
   """
   insert_addresses_one(
-    """the row to be inserted"""
+    """
+    the row to be inserted
+    """
     object: addresses_insert_input!
 
-    """on conflict condition"""
+    """
+    on conflict condition
+    """
     on_conflict: addresses_on_conflict
   ): addresses
 
@@ -997,10 +1179,14 @@ type mutation_root {
   insert data into the table: "images"
   """
   insert_images(
-    """the rows to be inserted"""
+    """
+    the rows to be inserted
+    """
     objects: [images_insert_input!]!
 
-    """on conflict condition"""
+    """
+    on conflict condition
+    """
     on_conflict: images_on_conflict
   ): images_mutation_response
 
@@ -1008,10 +1194,14 @@ type mutation_root {
   insert a single row into the table: "images"
   """
   insert_images_one(
-    """the row to be inserted"""
+    """
+    the row to be inserted
+    """
     object: images_insert_input!
 
-    """on conflict condition"""
+    """
+    on conflict condition
+    """
     on_conflict: images_on_conflict
   ): images
 
@@ -1019,10 +1209,14 @@ type mutation_root {
   insert data into the table: "pet_species"
   """
   insert_pet_species(
-    """the rows to be inserted"""
+    """
+    the rows to be inserted
+    """
     objects: [pet_species_insert_input!]!
 
-    """on conflict condition"""
+    """
+    on conflict condition
+    """
     on_conflict: pet_species_on_conflict
   ): pet_species_mutation_response
 
@@ -1030,10 +1224,14 @@ type mutation_root {
   insert a single row into the table: "pet_species"
   """
   insert_pet_species_one(
-    """the row to be inserted"""
+    """
+    the row to be inserted
+    """
     object: pet_species_insert_input!
 
-    """on conflict condition"""
+    """
+    on conflict condition
+    """
     on_conflict: pet_species_on_conflict
   ): pet_species
 
@@ -1041,10 +1239,14 @@ type mutation_root {
   insert data into the table: "pets"
   """
   insert_pets(
-    """the rows to be inserted"""
+    """
+    the rows to be inserted
+    """
     objects: [pets_insert_input!]!
 
-    """on conflict condition"""
+    """
+    on conflict condition
+    """
     on_conflict: pets_on_conflict
   ): pets_mutation_response
 
@@ -1052,10 +1254,14 @@ type mutation_root {
   insert a single row into the table: "pets"
   """
   insert_pets_one(
-    """the row to be inserted"""
+    """
+    the row to be inserted
+    """
     object: pets_insert_input!
 
-    """on conflict condition"""
+    """
+    on conflict condition
+    """
     on_conflict: pets_on_conflict
   ): pets
 
@@ -1063,10 +1269,14 @@ type mutation_root {
   insert data into the table: "user_browsers"
   """
   insert_user_browsers(
-    """the rows to be inserted"""
+    """
+    the rows to be inserted
+    """
     objects: [user_browsers_insert_input!]!
 
-    """on conflict condition"""
+    """
+    on conflict condition
+    """
     on_conflict: user_browsers_on_conflict
   ): user_browsers_mutation_response
 
@@ -1074,10 +1284,14 @@ type mutation_root {
   insert a single row into the table: "user_browsers"
   """
   insert_user_browsers_one(
-    """the row to be inserted"""
+    """
+    the row to be inserted
+    """
     object: user_browsers_insert_input!
 
-    """on conflict condition"""
+    """
+    on conflict condition
+    """
     on_conflict: user_browsers_on_conflict
   ): user_browsers
 
@@ -1085,10 +1299,14 @@ type mutation_root {
   insert data into the table: "user_pets"
   """
   insert_user_pets(
-    """the rows to be inserted"""
+    """
+    the rows to be inserted
+    """
     objects: [user_pets_insert_input!]!
 
-    """on conflict condition"""
+    """
+    on conflict condition
+    """
     on_conflict: user_pets_on_conflict
   ): user_pets_mutation_response
 
@@ -1096,10 +1314,14 @@ type mutation_root {
   insert a single row into the table: "user_pets"
   """
   insert_user_pets_one(
-    """the row to be inserted"""
+    """
+    the row to be inserted
+    """
     object: user_pets_insert_input!
 
-    """on conflict condition"""
+    """
+    on conflict condition
+    """
     on_conflict: user_pets_on_conflict
   ): user_pets
 
@@ -1107,10 +1329,14 @@ type mutation_root {
   insert data into the table: "users"
   """
   insert_users(
-    """the rows to be inserted"""
+    """
+    the rows to be inserted
+    """
     objects: [users_insert_input!]!
 
-    """on conflict condition"""
+    """
+    on conflict condition
+    """
     on_conflict: users_on_conflict
   ): users_mutation_response
 
@@ -1118,10 +1344,14 @@ type mutation_root {
   insert a single row into the table: "users"
   """
   insert_users_one(
-    """the row to be inserted"""
+    """
+    the row to be inserted
+    """
     object: users_insert_input!
 
-    """on conflict condition"""
+    """
+    on conflict condition
+    """
     on_conflict: users_on_conflict
   ): users
 
@@ -1129,13 +1359,19 @@ type mutation_root {
   update data of the table: "addresses"
   """
   update_addresses(
-    """increments the integer columns with given value of the filtered values"""
+    """
+    increments the integer columns with given value of the filtered values
+    """
     _inc: addresses_inc_input
 
-    """sets the columns of the filtered rows to the given values"""
+    """
+    sets the columns of the filtered rows to the given values
+    """
     _set: addresses_set_input
 
-    """filter the rows which have to be updated"""
+    """
+    filter the rows which have to be updated
+    """
     where: addresses_bool_exp!
   ): addresses_mutation_response
 
@@ -1143,10 +1379,14 @@ type mutation_root {
   update single row of the table: "addresses"
   """
   update_addresses_by_pk(
-    """increments the integer columns with given value of the filtered values"""
+    """
+    increments the integer columns with given value of the filtered values
+    """
     _inc: addresses_inc_input
 
-    """sets the columns of the filtered rows to the given values"""
+    """
+    sets the columns of the filtered rows to the given values
+    """
     _set: addresses_set_input
     pk_columns: addresses_pk_columns_input!
   ): addresses
@@ -1155,13 +1395,19 @@ type mutation_root {
   update data of the table: "images"
   """
   update_images(
-    """increments the integer columns with given value of the filtered values"""
+    """
+    increments the integer columns with given value of the filtered values
+    """
     _inc: images_inc_input
 
-    """sets the columns of the filtered rows to the given values"""
+    """
+    sets the columns of the filtered rows to the given values
+    """
     _set: images_set_input
 
-    """filter the rows which have to be updated"""
+    """
+    filter the rows which have to be updated
+    """
     where: images_bool_exp!
   ): images_mutation_response
 
@@ -1169,10 +1415,14 @@ type mutation_root {
   update single row of the table: "images"
   """
   update_images_by_pk(
-    """increments the integer columns with given value of the filtered values"""
+    """
+    increments the integer columns with given value of the filtered values
+    """
     _inc: images_inc_input
 
-    """sets the columns of the filtered rows to the given values"""
+    """
+    sets the columns of the filtered rows to the given values
+    """
     _set: images_set_input
     pk_columns: images_pk_columns_input!
   ): images
@@ -1181,13 +1431,19 @@ type mutation_root {
   update data of the table: "pet_species"
   """
   update_pet_species(
-    """increments the integer columns with given value of the filtered values"""
+    """
+    increments the integer columns with given value of the filtered values
+    """
     _inc: pet_species_inc_input
 
-    """sets the columns of the filtered rows to the given values"""
+    """
+    sets the columns of the filtered rows to the given values
+    """
     _set: pet_species_set_input
 
-    """filter the rows which have to be updated"""
+    """
+    filter the rows which have to be updated
+    """
     where: pet_species_bool_exp!
   ): pet_species_mutation_response
 
@@ -1195,10 +1451,14 @@ type mutation_root {
   update single row of the table: "pet_species"
   """
   update_pet_species_by_pk(
-    """increments the integer columns with given value of the filtered values"""
+    """
+    increments the integer columns with given value of the filtered values
+    """
     _inc: pet_species_inc_input
 
-    """sets the columns of the filtered rows to the given values"""
+    """
+    sets the columns of the filtered rows to the given values
+    """
     _set: pet_species_set_input
     pk_columns: pet_species_pk_columns_input!
   ): pet_species
@@ -1207,13 +1467,19 @@ type mutation_root {
   update data of the table: "pets"
   """
   update_pets(
-    """increments the integer columns with given value of the filtered values"""
+    """
+    increments the integer columns with given value of the filtered values
+    """
     _inc: pets_inc_input
 
-    """sets the columns of the filtered rows to the given values"""
+    """
+    sets the columns of the filtered rows to the given values
+    """
     _set: pets_set_input
 
-    """filter the rows which have to be updated"""
+    """
+    filter the rows which have to be updated
+    """
     where: pets_bool_exp!
   ): pets_mutation_response
 
@@ -1221,10 +1487,14 @@ type mutation_root {
   update single row of the table: "pets"
   """
   update_pets_by_pk(
-    """increments the integer columns with given value of the filtered values"""
+    """
+    increments the integer columns with given value of the filtered values
+    """
     _inc: pets_inc_input
 
-    """sets the columns of the filtered rows to the given values"""
+    """
+    sets the columns of the filtered rows to the given values
+    """
     _set: pets_set_input
     pk_columns: pets_pk_columns_input!
   ): pets
@@ -1233,13 +1503,19 @@ type mutation_root {
   update data of the table: "user_browsers"
   """
   update_user_browsers(
-    """increments the integer columns with given value of the filtered values"""
+    """
+    increments the integer columns with given value of the filtered values
+    """
     _inc: user_browsers_inc_input
 
-    """sets the columns of the filtered rows to the given values"""
+    """
+    sets the columns of the filtered rows to the given values
+    """
     _set: user_browsers_set_input
 
-    """filter the rows which have to be updated"""
+    """
+    filter the rows which have to be updated
+    """
     where: user_browsers_bool_exp!
   ): user_browsers_mutation_response
 
@@ -1247,10 +1523,14 @@ type mutation_root {
   update single row of the table: "user_browsers"
   """
   update_user_browsers_by_pk(
-    """increments the integer columns with given value of the filtered values"""
+    """
+    increments the integer columns with given value of the filtered values
+    """
     _inc: user_browsers_inc_input
 
-    """sets the columns of the filtered rows to the given values"""
+    """
+    sets the columns of the filtered rows to the given values
+    """
     _set: user_browsers_set_input
     pk_columns: user_browsers_pk_columns_input!
   ): user_browsers
@@ -1259,13 +1539,19 @@ type mutation_root {
   update data of the table: "user_pets"
   """
   update_user_pets(
-    """increments the integer columns with given value of the filtered values"""
+    """
+    increments the integer columns with given value of the filtered values
+    """
     _inc: user_pets_inc_input
 
-    """sets the columns of the filtered rows to the given values"""
+    """
+    sets the columns of the filtered rows to the given values
+    """
     _set: user_pets_set_input
 
-    """filter the rows which have to be updated"""
+    """
+    filter the rows which have to be updated
+    """
     where: user_pets_bool_exp!
   ): user_pets_mutation_response
 
@@ -1273,10 +1559,14 @@ type mutation_root {
   update single row of the table: "user_pets"
   """
   update_user_pets_by_pk(
-    """increments the integer columns with given value of the filtered values"""
+    """
+    increments the integer columns with given value of the filtered values
+    """
     _inc: user_pets_inc_input
 
-    """sets the columns of the filtered rows to the given values"""
+    """
+    sets the columns of the filtered rows to the given values
+    """
     _set: user_pets_set_input
     pk_columns: user_pets_pk_columns_input!
   ): user_pets
@@ -1285,13 +1575,19 @@ type mutation_root {
   update data of the table: "users"
   """
   update_users(
-    """increments the integer columns with given value of the filtered values"""
+    """
+    increments the integer columns with given value of the filtered values
+    """
     _inc: users_inc_input
 
-    """sets the columns of the filtered rows to the given values"""
+    """
+    sets the columns of the filtered rows to the given values
+    """
     _set: users_set_input
 
-    """filter the rows which have to be updated"""
+    """
+    filter the rows which have to be updated
+    """
     where: users_bool_exp!
   ): users_mutation_response
 
@@ -1299,33 +1595,51 @@ type mutation_root {
   update single row of the table: "users"
   """
   update_users_by_pk(
-    """increments the integer columns with given value of the filtered values"""
+    """
+    increments the integer columns with given value of the filtered values
+    """
     _inc: users_inc_input
 
-    """sets the columns of the filtered rows to the given values"""
+    """
+    sets the columns of the filtered rows to the given values
+    """
     _set: users_set_input
     pk_columns: users_pk_columns_input!
   ): users
 }
 
-"""column ordering options"""
+"""
+column ordering options
+"""
 enum order_by {
-  """in the ascending order, nulls last"""
+  """
+  in the ascending order, nulls last
+  """
   asc
 
-  """in the ascending order, nulls first"""
+  """
+  in the ascending order, nulls first
+  """
   asc_nulls_first
 
-  """in the ascending order, nulls last"""
+  """
+  in the ascending order, nulls last
+  """
   asc_nulls_last
 
-  """in the descending order, nulls first"""
+  """
+  in the descending order, nulls first
+  """
   desc
 
-  """in the descending order, nulls first"""
+  """
+  in the descending order, nulls first
+  """
   desc_nulls_first
 
-  """in the descending order, nulls last"""
+  """
+  in the descending order, nulls last
+  """
   desc_nulls_last
 }
 
@@ -1335,39 +1649,63 @@ columns and relationships of "pet_species"
 type pet_species {
   id: Int!
 
-  """An array relationship"""
+  """
+  An array relationship
+  """
   pets(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: pets_bool_exp
   ): [pets!]!
 
-  """An aggregated array relationship"""
+  """
+  An aggregated array relationship
+  """
   pets_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: pets_bool_exp
   ): pets_aggregate!
   type: String!
@@ -1423,7 +1761,9 @@ input pet_species_arr_rel_insert_input {
   on_conflict: pet_species_on_conflict
 }
 
-"""aggregate avg on columns"""
+"""
+aggregate avg on columns
+"""
 type pet_species_avg_fields {
   id: Float
 }
@@ -1451,10 +1791,14 @@ input pet_species_bool_exp {
 unique or primary key constraints on table "pet_species"
 """
 enum pet_species_constraint {
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   pet_species_pkey
 
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   pet_species_type_key
 }
 
@@ -1474,7 +1818,9 @@ input pet_species_insert_input {
   type: String
 }
 
-"""aggregate max on columns"""
+"""
+aggregate max on columns
+"""
 type pet_species_max_fields {
   id: Int
   type: String
@@ -1488,7 +1834,9 @@ input pet_species_max_order_by {
   type: order_by
 }
 
-"""aggregate min on columns"""
+"""
+aggregate min on columns
+"""
 type pet_species_min_fields {
   id: Int
   type: String
@@ -1506,10 +1854,14 @@ input pet_species_min_order_by {
 response of any mutation on the table "pet_species"
 """
 type pet_species_mutation_response {
-  """number of affected rows by the mutation"""
+  """
+  number of affected rows by the mutation
+  """
   affected_rows: Int!
 
-  """data of the affected rows by the mutation"""
+  """
+  data of the affected rows by the mutation
+  """
   returning: [pet_species!]!
 }
 
@@ -1550,10 +1902,14 @@ input pet_species_pk_columns_input {
 select columns of table "pet_species"
 """
 enum pet_species_select_column {
-  """column name"""
+  """
+  column name
+  """
   id
 
-  """column name"""
+  """
+  column name
+  """
   type
 }
 
@@ -1565,7 +1921,9 @@ input pet_species_set_input {
   type: String
 }
 
-"""aggregate stddev on columns"""
+"""
+aggregate stddev on columns
+"""
 type pet_species_stddev_fields {
   id: Float
 }
@@ -1577,7 +1935,9 @@ input pet_species_stddev_order_by {
   id: order_by
 }
 
-"""aggregate stddev_pop on columns"""
+"""
+aggregate stddev_pop on columns
+"""
 type pet_species_stddev_pop_fields {
   id: Float
 }
@@ -1589,7 +1949,9 @@ input pet_species_stddev_pop_order_by {
   id: order_by
 }
 
-"""aggregate stddev_samp on columns"""
+"""
+aggregate stddev_samp on columns
+"""
 type pet_species_stddev_samp_fields {
   id: Float
 }
@@ -1601,7 +1963,9 @@ input pet_species_stddev_samp_order_by {
   id: order_by
 }
 
-"""aggregate sum on columns"""
+"""
+aggregate sum on columns
+"""
 type pet_species_sum_fields {
   id: Int
 }
@@ -1617,14 +1981,20 @@ input pet_species_sum_order_by {
 update columns of table "pet_species"
 """
 enum pet_species_update_column {
-  """column name"""
+  """
+  column name
+  """
   id
 
-  """column name"""
+  """
+  column name
+  """
   type
 }
 
-"""aggregate var_pop on columns"""
+"""
+aggregate var_pop on columns
+"""
 type pet_species_var_pop_fields {
   id: Float
 }
@@ -1636,7 +2006,9 @@ input pet_species_var_pop_order_by {
   id: order_by
 }
 
-"""aggregate var_samp on columns"""
+"""
+aggregate var_samp on columns
+"""
 type pet_species_var_samp_fields {
   id: Float
 }
@@ -1648,7 +2020,9 @@ input pet_species_var_samp_order_by {
   id: order_by
 }
 
-"""aggregate variance on columns"""
+"""
+aggregate variance on columns
+"""
 type pet_species_variance_fields {
   id: Float
 }
@@ -1664,50 +2038,78 @@ input pet_species_variance_order_by {
 columns and relationships of "pets"
 """
 type pets {
-  """An object relationship"""
+  """
+  An object relationship
+  """
   avatar: images
   avatarId: Int
   description: String
   id: Int!
   name: String!
 
-  """An object relationship"""
-  pet_specy: pet_species!
+  """
+  An object relationship
+  """
+  pet_species: pet_species!
   species: Int!
 
-  """An array relationship"""
+  """
+  An array relationship
+  """
   user_pets(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [user_pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [user_pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: user_pets_bool_exp
   ): [user_pets!]!
 
-  """An aggregated array relationship"""
+  """
+  An aggregated array relationship
+  """
   user_pets_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [user_pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [user_pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: user_pets_bool_exp
   ): user_pets_aggregate!
   uuid: uuid!
@@ -1763,7 +2165,9 @@ input pets_arr_rel_insert_input {
   on_conflict: pets_on_conflict
 }
 
-"""aggregate avg on columns"""
+"""
+aggregate avg on columns
+"""
 type pets_avg_fields {
   avatarId: Float
   id: Float
@@ -1791,7 +2195,7 @@ input pets_bool_exp {
   description: String_comparison_exp
   id: Int_comparison_exp
   name: String_comparison_exp
-  pet_specy: pet_species_bool_exp
+  pet_species: pet_species_bool_exp
   species: Int_comparison_exp
   user_pets: user_pets_bool_exp
   uuid: uuid_comparison_exp
@@ -1801,10 +2205,14 @@ input pets_bool_exp {
 unique or primary key constraints on table "pets"
 """
 enum pets_constraint {
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   pets_id_key
 
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   pets_pkey
 }
 
@@ -1826,13 +2234,15 @@ input pets_insert_input {
   description: String
   id: Int
   name: String
-  pet_specy: pet_species_obj_rel_insert_input
+  pet_species: pet_species_obj_rel_insert_input
   species: Int
   user_pets: user_pets_arr_rel_insert_input
   uuid: uuid
 }
 
-"""aggregate max on columns"""
+"""
+aggregate max on columns
+"""
 type pets_max_fields {
   avatarId: Int
   description: String
@@ -1854,7 +2264,9 @@ input pets_max_order_by {
   uuid: order_by
 }
 
-"""aggregate min on columns"""
+"""
+aggregate min on columns
+"""
 type pets_min_fields {
   avatarId: Int
   description: String
@@ -1880,10 +2292,14 @@ input pets_min_order_by {
 response of any mutation on the table "pets"
 """
 type pets_mutation_response {
-  """number of affected rows by the mutation"""
+  """
+  number of affected rows by the mutation
+  """
   affected_rows: Int!
 
-  """data of the affected rows by the mutation"""
+  """
+  data of the affected rows by the mutation
+  """
   returning: [pets!]!
 }
 
@@ -1913,7 +2329,7 @@ input pets_order_by {
   description: order_by
   id: order_by
   name: order_by
-  pet_specy: pet_species_order_by
+  pet_species: pet_species_order_by
   species: order_by
   user_pets_aggregate: user_pets_aggregate_order_by
   uuid: order_by
@@ -1930,22 +2346,34 @@ input pets_pk_columns_input {
 select columns of table "pets"
 """
 enum pets_select_column {
-  """column name"""
+  """
+  column name
+  """
   avatarId
 
-  """column name"""
+  """
+  column name
+  """
   description
 
-  """column name"""
+  """
+  column name
+  """
   id
 
-  """column name"""
+  """
+  column name
+  """
   name
 
-  """column name"""
+  """
+  column name
+  """
   species
 
-  """column name"""
+  """
+  column name
+  """
   uuid
 }
 
@@ -1961,7 +2389,9 @@ input pets_set_input {
   uuid: uuid
 }
 
-"""aggregate stddev on columns"""
+"""
+aggregate stddev on columns
+"""
 type pets_stddev_fields {
   avatarId: Float
   id: Float
@@ -1977,7 +2407,9 @@ input pets_stddev_order_by {
   species: order_by
 }
 
-"""aggregate stddev_pop on columns"""
+"""
+aggregate stddev_pop on columns
+"""
 type pets_stddev_pop_fields {
   avatarId: Float
   id: Float
@@ -1993,7 +2425,9 @@ input pets_stddev_pop_order_by {
   species: order_by
 }
 
-"""aggregate stddev_samp on columns"""
+"""
+aggregate stddev_samp on columns
+"""
 type pets_stddev_samp_fields {
   avatarId: Float
   id: Float
@@ -2009,7 +2443,9 @@ input pets_stddev_samp_order_by {
   species: order_by
 }
 
-"""aggregate sum on columns"""
+"""
+aggregate sum on columns
+"""
 type pets_sum_fields {
   avatarId: Int
   id: Int
@@ -2029,26 +2465,40 @@ input pets_sum_order_by {
 update columns of table "pets"
 """
 enum pets_update_column {
-  """column name"""
+  """
+  column name
+  """
   avatarId
 
-  """column name"""
+  """
+  column name
+  """
   description
 
-  """column name"""
+  """
+  column name
+  """
   id
 
-  """column name"""
+  """
+  column name
+  """
   name
 
-  """column name"""
+  """
+  column name
+  """
   species
 
-  """column name"""
+  """
+  column name
+  """
   uuid
 }
 
-"""aggregate var_pop on columns"""
+"""
+aggregate var_pop on columns
+"""
 type pets_var_pop_fields {
   avatarId: Float
   id: Float
@@ -2064,7 +2514,9 @@ input pets_var_pop_order_by {
   species: order_by
 }
 
-"""aggregate var_samp on columns"""
+"""
+aggregate var_samp on columns
+"""
 type pets_var_samp_fields {
   avatarId: Float
   id: Float
@@ -2080,7 +2532,9 @@ input pets_var_samp_order_by {
   species: order_by
 }
 
-"""aggregate variance on columns"""
+"""
+aggregate variance on columns
+"""
 type pets_variance_fields {
   avatarId: Float
   id: Float
@@ -2096,25 +2550,37 @@ input pets_variance_order_by {
   species: order_by
 }
 
-"""query root"""
+"""
+query root
+"""
 type query_root {
   """
   fetch data from the table: "addresses"
   """
   addresses(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [addresses_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [addresses_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: addresses_bool_exp
   ): [addresses!]!
 
@@ -2122,42 +2588,64 @@ type query_root {
   fetch aggregated fields from the table: "addresses"
   """
   addresses_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [addresses_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [addresses_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: addresses_bool_exp
   ): addresses_aggregate!
 
-  """fetch data from the table: "addresses" using primary key columns"""
+  """
+  fetch data from the table: "addresses" using primary key columns
+  """
   addresses_by_pk(id: Int!): addresses
 
   """
   fetch data from the table: "images"
   """
   images(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [images_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [images_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: images_bool_exp
   ): [images!]!
 
@@ -2165,42 +2653,64 @@ type query_root {
   fetch aggregated fields from the table: "images"
   """
   images_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [images_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [images_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: images_bool_exp
   ): images_aggregate!
 
-  """fetch data from the table: "images" using primary key columns"""
+  """
+  fetch data from the table: "images" using primary key columns
+  """
   images_by_pk(id: Int!): images
 
   """
   fetch data from the table: "pet_species"
   """
   pet_species(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [pet_species_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [pet_species_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: pet_species_bool_exp
   ): [pet_species!]!
 
@@ -2208,42 +2718,64 @@ type query_root {
   fetch aggregated fields from the table: "pet_species"
   """
   pet_species_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [pet_species_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [pet_species_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: pet_species_bool_exp
   ): pet_species_aggregate!
 
-  """fetch data from the table: "pet_species" using primary key columns"""
+  """
+  fetch data from the table: "pet_species" using primary key columns
+  """
   pet_species_by_pk(id: Int!): pet_species
 
   """
   fetch data from the table: "pets"
   """
   pets(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: pets_bool_exp
   ): [pets!]!
 
@@ -2251,42 +2783,64 @@ type query_root {
   fetch aggregated fields from the table: "pets"
   """
   pets_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: pets_bool_exp
   ): pets_aggregate!
 
-  """fetch data from the table: "pets" using primary key columns"""
+  """
+  fetch data from the table: "pets" using primary key columns
+  """
   pets_by_pk(id: Int!): pets
 
   """
   fetch data from the table: "user_browsers"
   """
   user_browsers(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [user_browsers_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [user_browsers_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: user_browsers_bool_exp
   ): [user_browsers!]!
 
@@ -2294,42 +2848,64 @@ type query_root {
   fetch aggregated fields from the table: "user_browsers"
   """
   user_browsers_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [user_browsers_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [user_browsers_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: user_browsers_bool_exp
   ): user_browsers_aggregate!
 
-  """fetch data from the table: "user_browsers" using primary key columns"""
+  """
+  fetch data from the table: "user_browsers" using primary key columns
+  """
   user_browsers_by_pk(id: Int!): user_browsers
 
   """
   fetch data from the table: "user_pets"
   """
   user_pets(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [user_pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [user_pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: user_pets_bool_exp
   ): [user_pets!]!
 
@@ -2337,42 +2913,64 @@ type query_root {
   fetch aggregated fields from the table: "user_pets"
   """
   user_pets_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [user_pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [user_pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: user_pets_bool_exp
   ): user_pets_aggregate!
 
-  """fetch data from the table: "user_pets" using primary key columns"""
+  """
+  fetch data from the table: "user_pets" using primary key columns
+  """
   user_pets_by_pk(id: Int!): user_pets
 
   """
   fetch data from the table: "users"
   """
   users(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [users_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [users_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: users_bool_exp
   ): [users!]!
 
@@ -2380,23 +2978,35 @@ type query_root {
   fetch aggregated fields from the table: "users"
   """
   users_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [users_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [users_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: users_bool_exp
   ): users_aggregate!
 
-  """fetch data from the table: "users" using primary key columns"""
+  """
+  fetch data from the table: "users" using primary key columns
+  """
   users_by_pk(id: Int!): users
 }
 
@@ -2421,25 +3031,37 @@ input String_comparison_exp {
   _similar: String
 }
 
-"""subscription root"""
+"""
+subscription root
+"""
 type subscription_root {
   """
   fetch data from the table: "addresses"
   """
   addresses(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [addresses_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [addresses_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: addresses_bool_exp
   ): [addresses!]!
 
@@ -2447,42 +3069,64 @@ type subscription_root {
   fetch aggregated fields from the table: "addresses"
   """
   addresses_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [addresses_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [addresses_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: addresses_bool_exp
   ): addresses_aggregate!
 
-  """fetch data from the table: "addresses" using primary key columns"""
+  """
+  fetch data from the table: "addresses" using primary key columns
+  """
   addresses_by_pk(id: Int!): addresses
 
   """
   fetch data from the table: "images"
   """
   images(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [images_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [images_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: images_bool_exp
   ): [images!]!
 
@@ -2490,42 +3134,64 @@ type subscription_root {
   fetch aggregated fields from the table: "images"
   """
   images_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [images_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [images_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: images_bool_exp
   ): images_aggregate!
 
-  """fetch data from the table: "images" using primary key columns"""
+  """
+  fetch data from the table: "images" using primary key columns
+  """
   images_by_pk(id: Int!): images
 
   """
   fetch data from the table: "pet_species"
   """
   pet_species(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [pet_species_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [pet_species_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: pet_species_bool_exp
   ): [pet_species!]!
 
@@ -2533,42 +3199,64 @@ type subscription_root {
   fetch aggregated fields from the table: "pet_species"
   """
   pet_species_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [pet_species_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [pet_species_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: pet_species_bool_exp
   ): pet_species_aggregate!
 
-  """fetch data from the table: "pet_species" using primary key columns"""
+  """
+  fetch data from the table: "pet_species" using primary key columns
+  """
   pet_species_by_pk(id: Int!): pet_species
 
   """
   fetch data from the table: "pets"
   """
   pets(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: pets_bool_exp
   ): [pets!]!
 
@@ -2576,42 +3264,64 @@ type subscription_root {
   fetch aggregated fields from the table: "pets"
   """
   pets_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: pets_bool_exp
   ): pets_aggregate!
 
-  """fetch data from the table: "pets" using primary key columns"""
+  """
+  fetch data from the table: "pets" using primary key columns
+  """
   pets_by_pk(id: Int!): pets
 
   """
   fetch data from the table: "user_browsers"
   """
   user_browsers(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [user_browsers_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [user_browsers_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: user_browsers_bool_exp
   ): [user_browsers!]!
 
@@ -2619,42 +3329,64 @@ type subscription_root {
   fetch aggregated fields from the table: "user_browsers"
   """
   user_browsers_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [user_browsers_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [user_browsers_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: user_browsers_bool_exp
   ): user_browsers_aggregate!
 
-  """fetch data from the table: "user_browsers" using primary key columns"""
+  """
+  fetch data from the table: "user_browsers" using primary key columns
+  """
   user_browsers_by_pk(id: Int!): user_browsers
 
   """
   fetch data from the table: "user_pets"
   """
   user_pets(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [user_pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [user_pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: user_pets_bool_exp
   ): [user_pets!]!
 
@@ -2662,42 +3394,64 @@ type subscription_root {
   fetch aggregated fields from the table: "user_pets"
   """
   user_pets_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [user_pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [user_pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: user_pets_bool_exp
   ): user_pets_aggregate!
 
-  """fetch data from the table: "user_pets" using primary key columns"""
+  """
+  fetch data from the table: "user_pets" using primary key columns
+  """
   user_pets_by_pk(id: Int!): user_pets
 
   """
   fetch data from the table: "users"
   """
   users(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [users_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [users_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: users_bool_exp
   ): [users!]!
 
@@ -2705,23 +3459,35 @@ type subscription_root {
   fetch aggregated fields from the table: "users"
   """
   users_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [users_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [users_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: users_bool_exp
   ): users_aggregate!
 
-  """fetch data from the table: "users" using primary key columns"""
+  """
+  fetch data from the table: "users" using primary key columns
+  """
   users_by_pk(id: Int!): users
 }
 
@@ -2730,12 +3496,16 @@ columns and relationships of "user_browsers"
 """
 type user_browsers {
   browser_subscription_object(
-    """JSON select path"""
+    """
+    JSON select path
+    """
     path: String
   ): json!
   id: Int!
 
-  """An object relationship"""
+  """
+  An object relationship
+  """
   user: users!
   user_id: Int!
 }
@@ -2790,7 +3560,9 @@ input user_browsers_arr_rel_insert_input {
   on_conflict: user_browsers_on_conflict
 }
 
-"""aggregate avg on columns"""
+"""
+aggregate avg on columns
+"""
 type user_browsers_avg_fields {
   id: Float
   user_id: Float
@@ -2821,10 +3593,14 @@ input user_browsers_bool_exp {
 unique or primary key constraints on table "user_browsers"
 """
 enum user_browsers_constraint {
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   user_browsers_pkey
 
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   user_browsers_user_id_key
 }
 
@@ -2846,7 +3622,9 @@ input user_browsers_insert_input {
   user_id: Int
 }
 
-"""aggregate max on columns"""
+"""
+aggregate max on columns
+"""
 type user_browsers_max_fields {
   id: Int
   user_id: Int
@@ -2860,7 +3638,9 @@ input user_browsers_max_order_by {
   user_id: order_by
 }
 
-"""aggregate min on columns"""
+"""
+aggregate min on columns
+"""
 type user_browsers_min_fields {
   id: Int
   user_id: Int
@@ -2878,10 +3658,14 @@ input user_browsers_min_order_by {
 response of any mutation on the table "user_browsers"
 """
 type user_browsers_mutation_response {
-  """number of affected rows by the mutation"""
+  """
+  number of affected rows by the mutation
+  """
   affected_rows: Int!
 
-  """data of the affected rows by the mutation"""
+  """
+  data of the affected rows by the mutation
+  """
   returning: [user_browsers!]!
 }
 
@@ -2923,13 +3707,19 @@ input user_browsers_pk_columns_input {
 select columns of table "user_browsers"
 """
 enum user_browsers_select_column {
-  """column name"""
+  """
+  column name
+  """
   browser_subscription_object
 
-  """column name"""
+  """
+  column name
+  """
   id
 
-  """column name"""
+  """
+  column name
+  """
   user_id
 }
 
@@ -2942,7 +3732,9 @@ input user_browsers_set_input {
   user_id: Int
 }
 
-"""aggregate stddev on columns"""
+"""
+aggregate stddev on columns
+"""
 type user_browsers_stddev_fields {
   id: Float
   user_id: Float
@@ -2956,7 +3748,9 @@ input user_browsers_stddev_order_by {
   user_id: order_by
 }
 
-"""aggregate stddev_pop on columns"""
+"""
+aggregate stddev_pop on columns
+"""
 type user_browsers_stddev_pop_fields {
   id: Float
   user_id: Float
@@ -2970,7 +3764,9 @@ input user_browsers_stddev_pop_order_by {
   user_id: order_by
 }
 
-"""aggregate stddev_samp on columns"""
+"""
+aggregate stddev_samp on columns
+"""
 type user_browsers_stddev_samp_fields {
   id: Float
   user_id: Float
@@ -2984,7 +3780,9 @@ input user_browsers_stddev_samp_order_by {
   user_id: order_by
 }
 
-"""aggregate sum on columns"""
+"""
+aggregate sum on columns
+"""
 type user_browsers_sum_fields {
   id: Int
   user_id: Int
@@ -3002,17 +3800,25 @@ input user_browsers_sum_order_by {
 update columns of table "user_browsers"
 """
 enum user_browsers_update_column {
-  """column name"""
+  """
+  column name
+  """
   browser_subscription_object
 
-  """column name"""
+  """
+  column name
+  """
   id
 
-  """column name"""
+  """
+  column name
+  """
   user_id
 }
 
-"""aggregate var_pop on columns"""
+"""
+aggregate var_pop on columns
+"""
 type user_browsers_var_pop_fields {
   id: Float
   user_id: Float
@@ -3026,7 +3832,9 @@ input user_browsers_var_pop_order_by {
   user_id: order_by
 }
 
-"""aggregate var_samp on columns"""
+"""
+aggregate var_samp on columns
+"""
 type user_browsers_var_samp_fields {
   id: Float
   user_id: Float
@@ -3040,7 +3848,9 @@ input user_browsers_var_samp_order_by {
   user_id: order_by
 }
 
-"""aggregate variance on columns"""
+"""
+aggregate variance on columns
+"""
 type user_browsers_variance_fields {
   id: Float
   user_id: Float
@@ -3060,11 +3870,15 @@ columns and relationships of "user_pets"
 type user_pets {
   id: Int!
 
-  """An object relationship"""
+  """
+  An object relationship
+  """
   pet: pets!
   petId: Int!
 
-  """An object relationship"""
+  """
+  An object relationship
+  """
   user: users!
   userId: Int!
 }
@@ -3119,7 +3933,9 @@ input user_pets_arr_rel_insert_input {
   on_conflict: user_pets_on_conflict
 }
 
-"""aggregate avg on columns"""
+"""
+aggregate avg on columns
+"""
 type user_pets_avg_fields {
   id: Float
   petId: Float
@@ -3153,7 +3969,9 @@ input user_pets_bool_exp {
 unique or primary key constraints on table "user_pets"
 """
 enum user_pets_constraint {
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   user_pets_pkey
 }
 
@@ -3177,7 +3995,9 @@ input user_pets_insert_input {
   userId: Int
 }
 
-"""aggregate max on columns"""
+"""
+aggregate max on columns
+"""
 type user_pets_max_fields {
   id: Int
   petId: Int
@@ -3193,7 +4013,9 @@ input user_pets_max_order_by {
   userId: order_by
 }
 
-"""aggregate min on columns"""
+"""
+aggregate min on columns
+"""
 type user_pets_min_fields {
   id: Int
   petId: Int
@@ -3213,10 +4035,14 @@ input user_pets_min_order_by {
 response of any mutation on the table "user_pets"
 """
 type user_pets_mutation_response {
-  """number of affected rows by the mutation"""
+  """
+  number of affected rows by the mutation
+  """
   affected_rows: Int!
 
-  """data of the affected rows by the mutation"""
+  """
+  data of the affected rows by the mutation
+  """
   returning: [user_pets!]!
 }
 
@@ -3259,13 +4085,19 @@ input user_pets_pk_columns_input {
 select columns of table "user_pets"
 """
 enum user_pets_select_column {
-  """column name"""
+  """
+  column name
+  """
   id
 
-  """column name"""
+  """
+  column name
+  """
   petId
 
-  """column name"""
+  """
+  column name
+  """
   userId
 }
 
@@ -3278,7 +4110,9 @@ input user_pets_set_input {
   userId: Int
 }
 
-"""aggregate stddev on columns"""
+"""
+aggregate stddev on columns
+"""
 type user_pets_stddev_fields {
   id: Float
   petId: Float
@@ -3294,7 +4128,9 @@ input user_pets_stddev_order_by {
   userId: order_by
 }
 
-"""aggregate stddev_pop on columns"""
+"""
+aggregate stddev_pop on columns
+"""
 type user_pets_stddev_pop_fields {
   id: Float
   petId: Float
@@ -3310,7 +4146,9 @@ input user_pets_stddev_pop_order_by {
   userId: order_by
 }
 
-"""aggregate stddev_samp on columns"""
+"""
+aggregate stddev_samp on columns
+"""
 type user_pets_stddev_samp_fields {
   id: Float
   petId: Float
@@ -3326,7 +4164,9 @@ input user_pets_stddev_samp_order_by {
   userId: order_by
 }
 
-"""aggregate sum on columns"""
+"""
+aggregate sum on columns
+"""
 type user_pets_sum_fields {
   id: Int
   petId: Int
@@ -3346,17 +4186,25 @@ input user_pets_sum_order_by {
 update columns of table "user_pets"
 """
 enum user_pets_update_column {
-  """column name"""
+  """
+  column name
+  """
   id
 
-  """column name"""
+  """
+  column name
+  """
   petId
 
-  """column name"""
+  """
+  column name
+  """
   userId
 }
 
-"""aggregate var_pop on columns"""
+"""
+aggregate var_pop on columns
+"""
 type user_pets_var_pop_fields {
   id: Float
   petId: Float
@@ -3372,7 +4220,9 @@ input user_pets_var_pop_order_by {
   userId: order_by
 }
 
-"""aggregate var_samp on columns"""
+"""
+aggregate var_samp on columns
+"""
 type user_pets_var_samp_fields {
   id: Float
   petId: Float
@@ -3388,7 +4238,9 @@ input user_pets_var_samp_order_by {
   userId: order_by
 }
 
-"""aggregate variance on columns"""
+"""
+aggregate variance on columns
+"""
 type user_pets_variance_fields {
   id: Float
   petId: Float
@@ -3408,54 +4260,84 @@ input user_pets_variance_order_by {
 columns and relationships of "users"
 """
 type users {
-  """An object relationship"""
+  """
+  An object relationship
+  """
   address: addresses
   addressId: Int
   authId: String!
 
-  """An object relationship"""
+  """
+  An object relationship
+  """
   avatar: images
   avatarId: Int
   email: String!
   id: Int!
   name: String!
 
-  """An object relationship"""
+  """
+  An object relationship
+  """
   user_browser: user_browsers
 
-  """An array relationship"""
+  """
+  An array relationship
+  """
   user_pets(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [user_pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [user_pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: user_pets_bool_exp
   ): [user_pets!]!
 
-  """An aggregated array relationship"""
+  """
+  An aggregated array relationship
+  """
   user_pets_aggregate(
-    """distinct select on columns"""
+    """
+    distinct select on columns
+    """
     distinct_on: [user_pets_select_column!]
 
-    """limit the number of rows returned"""
+    """
+    limit the number of rows returned
+    """
     limit: Int
 
-    """skip the first n rows. Use only with order_by"""
+    """
+    skip the first n rows. Use only with order_by
+    """
     offset: Int
 
-    """sort the rows by one or more columns"""
+    """
+    sort the rows by one or more columns
+    """
     order_by: [user_pets_order_by!]
 
-    """filter the rows returned"""
+    """
+    filter the rows returned
+    """
     where: user_pets_bool_exp
   ): user_pets_aggregate!
 }
@@ -3510,7 +4392,9 @@ input users_arr_rel_insert_input {
   on_conflict: users_on_conflict
 }
 
-"""aggregate avg on columns"""
+"""
+aggregate avg on columns
+"""
 type users_avg_fields {
   addressId: Float
   avatarId: Float
@@ -3549,19 +4433,29 @@ input users_bool_exp {
 unique or primary key constraints on table "users"
 """
 enum users_constraint {
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   users_addressId_key
 
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   users_authId_key
 
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   users_email_key
 
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   users_id_key
 
-  """unique or primary key constraint"""
+  """
+  unique or primary key constraint
+  """
   users_pkey
 }
 
@@ -3590,7 +4484,9 @@ input users_insert_input {
   user_pets: user_pets_arr_rel_insert_input
 }
 
-"""aggregate max on columns"""
+"""
+aggregate max on columns
+"""
 type users_max_fields {
   addressId: Int
   authId: String
@@ -3612,7 +4508,9 @@ input users_max_order_by {
   name: order_by
 }
 
-"""aggregate min on columns"""
+"""
+aggregate min on columns
+"""
 type users_min_fields {
   addressId: Int
   authId: String
@@ -3638,10 +4536,14 @@ input users_min_order_by {
 response of any mutation on the table "users"
 """
 type users_mutation_response {
-  """number of affected rows by the mutation"""
+  """
+  number of affected rows by the mutation
+  """
   affected_rows: Int!
 
-  """data of the affected rows by the mutation"""
+  """
+  data of the affected rows by the mutation
+  """
   returning: [users!]!
 }
 
@@ -3689,22 +4591,34 @@ input users_pk_columns_input {
 select columns of table "users"
 """
 enum users_select_column {
-  """column name"""
+  """
+  column name
+  """
   addressId
 
-  """column name"""
+  """
+  column name
+  """
   authId
 
-  """column name"""
+  """
+  column name
+  """
   avatarId
 
-  """column name"""
+  """
+  column name
+  """
   email
 
-  """column name"""
+  """
+  column name
+  """
   id
 
-  """column name"""
+  """
+  column name
+  """
   name
 }
 
@@ -3720,7 +4634,9 @@ input users_set_input {
   name: String
 }
 
-"""aggregate stddev on columns"""
+"""
+aggregate stddev on columns
+"""
 type users_stddev_fields {
   addressId: Float
   avatarId: Float
@@ -3736,7 +4652,9 @@ input users_stddev_order_by {
   id: order_by
 }
 
-"""aggregate stddev_pop on columns"""
+"""
+aggregate stddev_pop on columns
+"""
 type users_stddev_pop_fields {
   addressId: Float
   avatarId: Float
@@ -3752,7 +4670,9 @@ input users_stddev_pop_order_by {
   id: order_by
 }
 
-"""aggregate stddev_samp on columns"""
+"""
+aggregate stddev_samp on columns
+"""
 type users_stddev_samp_fields {
   addressId: Float
   avatarId: Float
@@ -3768,7 +4688,9 @@ input users_stddev_samp_order_by {
   id: order_by
 }
 
-"""aggregate sum on columns"""
+"""
+aggregate sum on columns
+"""
 type users_sum_fields {
   addressId: Int
   avatarId: Int
@@ -3788,26 +4710,40 @@ input users_sum_order_by {
 update columns of table "users"
 """
 enum users_update_column {
-  """column name"""
+  """
+  column name
+  """
   addressId
 
-  """column name"""
+  """
+  column name
+  """
   authId
 
-  """column name"""
+  """
+  column name
+  """
   avatarId
 
-  """column name"""
+  """
+  column name
+  """
   email
 
-  """column name"""
+  """
+  column name
+  """
   id
 
-  """column name"""
+  """
+  column name
+  """
   name
 }
 
-"""aggregate var_pop on columns"""
+"""
+aggregate var_pop on columns
+"""
 type users_var_pop_fields {
   addressId: Float
   avatarId: Float
@@ -3823,7 +4759,9 @@ input users_var_pop_order_by {
   id: order_by
 }
 
-"""aggregate var_samp on columns"""
+"""
+aggregate var_samp on columns
+"""
 type users_var_samp_fields {
   addressId: Float
   avatarId: Float
@@ -3839,7 +4777,9 @@ input users_var_samp_order_by {
   id: order_by
 }
 
-"""aggregate variance on columns"""
+"""
+aggregate variance on columns
+"""
 type users_variance_fields {
   addressId: Float
   avatarId: Float
