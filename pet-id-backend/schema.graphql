@@ -1,5 +1,5 @@
 schema {
-  query: query_root
+  query: Query
   mutation: Mutation
   subscription: subscription_root
 }
@@ -2553,7 +2553,7 @@ input pets_variance_order_by {
 """
 query root
 """
-type query_root {
+type Query {
   """
   fetch data from the table: "addresses"
   """

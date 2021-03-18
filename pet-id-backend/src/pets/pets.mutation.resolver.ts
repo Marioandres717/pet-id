@@ -9,7 +9,7 @@ import {
 import { Pets_insert_input } from 'src/graphql';
 import { CreateOnePetCommand } from './commands/impl/create-one-pet.command';
 
-@Resolver('New_pets')
+@Resolver('pets')
 export class PetsMutationResolver {
   constructor(private readonly commandBus: CommandBus) {}
 
