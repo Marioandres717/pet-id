@@ -6,6 +6,7 @@ import { Pets } from './respository/pets.entity';
 import { CqrsModule } from '@nestjs/cqrs';
 import { PetsQueryResolver } from './pets.query.resolver';
 import { CommandHandlers } from './commands/handlers';
+import { QueryHandlers } from './queries/handlers';
 
 @Module({
   imports: [CqrsModule, TypeOrmModule.forFeature([Pets])],
@@ -14,6 +15,7 @@ import { CommandHandlers } from './commands/handlers';
     PetsMutationResolver,
     PetsQueryResolver,
     ...CommandHandlers,
+    ...QueryHandlers,
   ],
 })
 export class PetsModule {}

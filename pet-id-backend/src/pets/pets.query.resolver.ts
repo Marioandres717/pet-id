@@ -1,14 +1,24 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
-import { PetsService } from './respository/pets.service';
+import { QueryBus } from '@nestjs/cqrs';
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { GetPetSpeciesQuery } from 'src/pet-species/queries/impl';
+import { GetPetQuery } from './queries/impl/get-pet.query';
 
 @Resolver('pets')
 export class PetsQueryResolver {
-  constructor(private readonly repository: PetsService) {}
+  constructor(private readonly queryBus: QueryBus) {}
 
   @Query()
-  async pets_by_pk(@Args('id') id: number) {
-    const pet = await this.repository.findOneById(id);
-    return pet;
-    // return { ...pet, pet_species: { ...species }, species: pet_species.id };
+  pets_by_pk(@Args('id') id: number) {
+    return this.queryBus.execute(new GetPetQuery(id));
+  }
+
+  @ResolveField()
+  species(@Parent() pet) {
+    return pet.pet_species.id;
+  }
+
+  @ResolveField()
+  pet_species(@Parent() pet) {
+    return this.queryBus.execute(new GetPetSpeciesQuery(pet.pet_species.id));
   }
 }

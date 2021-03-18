@@ -1,11 +1,5 @@
 import { CommandBus } from '@nestjs/cqrs';
-import {
-  Args,
-  Mutation,
-  Parent,
-  ResolveField,
-  Resolver,
-} from '@nestjs/graphql';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { Pets_insert_input } from 'src/graphql';
 import { CreateOnePetCommand } from './commands/impl/create-one-pet.command';
 
@@ -26,10 +20,4 @@ export class PetsMutationResolver {
     );
     return pet;
   }
-
-  // @Resolver('pets')
-  // @ResolveField()
-  // pet_species(@Parent() pet) {
-  //   return this.commandBus.execute();
-  // }
 }
