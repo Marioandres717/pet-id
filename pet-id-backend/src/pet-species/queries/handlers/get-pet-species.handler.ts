@@ -1,5 +1,5 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { PetSpeciesService } from 'src/pet-species/repository/pet-species.service';
+import { PetSpeciesService } from 'src/pet-species/repository';
 import { GetPetSpeciesQuery } from '../impl';
 
 @QueryHandler(GetPetSpeciesQuery)

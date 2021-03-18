@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
-import { PetsService } from './respository/pets.service';
 import { PetsMutationResolver } from './pets.mutation.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Pets } from './respository/pets.entity';
 import { CqrsModule } from '@nestjs/cqrs';
+import { Pets, PetsService } from './respository';
 import { PetsQueryResolver } from './pets.query.resolver';
 import { CommandHandlers } from './commands/handlers';
 import { QueryHandlers } from './queries/handlers';

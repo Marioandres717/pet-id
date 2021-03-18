@@ -1,5 +1,5 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
-import { PetSpeciesService } from 'src/pet-species/repository/pet-species.service';
+import { PetSpeciesService } from 'src/pet-species/repository';
 import { CreateOnePetSpeciesCommand } from '../impl/create-one-pet-species.command';
 
 @CommandHandler(CreateOnePetSpeciesCommand)

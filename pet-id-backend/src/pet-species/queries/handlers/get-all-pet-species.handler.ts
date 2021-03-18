@@ -1,6 +1,5 @@
 import { QueryHandler, IQueryHandler } from '@nestjs/cqrs';
-import * as clc from 'cli-color';
-import { PetSpeciesService } from 'src/pet-species/repository/pet-species.service';
+import { PetSpeciesService } from 'src/pet-species/repository';
 import { GetAllPetSpeciesQuery } from '../impl';
 
 @QueryHandler(GetAllPetSpeciesQuery)
