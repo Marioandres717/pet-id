@@ -1,6 +1,6 @@
 schema {
   query: query_root
-  mutation: mutation_root
+  mutation: Mutation
   subscription: subscription_root
 }
 
@@ -1039,7 +1039,7 @@ input json_comparison_exp {
 """
 mutation root
 """
-type mutation_root {
+type Mutation {
   """
   delete data from the table: "addresses"
   """

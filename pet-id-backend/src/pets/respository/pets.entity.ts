@@ -8,7 +8,12 @@ import {
 } from 'typeorm';
 import { PetSpecies } from 'src/pet-species/repository/pet-species.entity';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { Pets as IPets } from 'src/graphql';
+import {
+  Images,
+  Pets as IPets,
+  User_pets,
+  User_Pets_aggregate,
+} from 'src/graphql';
 
 @Entity()
 export class Pets extends AggregateRoot implements IPets {
@@ -35,4 +40,9 @@ export class Pets extends AggregateRoot implements IPets {
   constructor() {
     super();
   }
+  avatar?: Images;
+  avatarId?: number;
+  species: number;
+  user_pets: User_pets[];
+  User_Pets_aggregate: User_Pets_aggregate;
 }
