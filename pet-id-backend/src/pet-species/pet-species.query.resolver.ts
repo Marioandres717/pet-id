@@ -1,6 +1,5 @@
 import { QueryBus } from '@nestjs/cqrs';
 import { Args, ResolveField, Resolver } from '@nestjs/graphql';
-import * as clc from 'cli-color';
 import { GetAllPetSpeciesQuery, GetPetSpeciesQuery } from './queries/impl';
 import { PetSpecies } from './repository/pet-species.entity';
 
@@ -14,7 +13,7 @@ export class PetSpeciesQueryResolver {
   }
 
   @ResolveField()
-  async pet_species(): Promise<PetSpecies[]> {
+  pet_species(): Promise<PetSpecies[]> {
     return this.queryBus.execute(new GetAllPetSpeciesQuery());
   }
 }

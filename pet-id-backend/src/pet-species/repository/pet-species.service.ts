@@ -7,7 +7,7 @@ import { PetSpecies } from './pet-species.entity';
 export class PetSpeciesService {
   constructor(
     @InjectRepository(PetSpecies)
-    private repository: Repository<PetSpecies>,
+    private readonly repository: Repository<PetSpecies>,
   ) {}
 
   create(type: string) {
