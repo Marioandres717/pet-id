@@ -6,6 +6,7 @@ import { CreateUserCommand } from './commands/impl/create-user.command';
 @Resolver('users')
 export class UsersMutationResolver {
   constructor(private readonly commandBus: CommandBus) {}
+
   @Mutation()
   insert_users_one(@Args('object') data: Users_insert_input): Promise<Users> {
     const { name, authId, email } = data;

@@ -8,7 +8,7 @@ export class PetSpeciesQueryResolver {
   constructor(private readonly queryBus: QueryBus) {}
 
   @Query()
-  async pet_species_by_pk(@Args('id') id: number): Promise<PetSpecies> {
+  pet_species_by_pk(@Args('id') id: number): Promise<PetSpecies> {
     return this.queryBus.execute(new GetPetSpeciesQuery(id));
   }
 
