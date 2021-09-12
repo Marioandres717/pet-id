@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppController } from './app.controller';
 import { PetSpeciesModule } from './pet-species/pet-species.module';
 import { PetsModule } from './pets/pets.module';
 import { UsersModule } from './users/users.module';
@@ -25,5 +26,6 @@ import { UsersModule } from './users/users.module';
     PetsModule,
     UsersModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule {}
