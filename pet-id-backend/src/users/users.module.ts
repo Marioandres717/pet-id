@@ -5,7 +5,7 @@ import { UsersMutationResolver } from './users.mutation.resolver';
 import { Users } from './repository';
 import { UsersService } from './repository';
 import { CommandHandlers } from './commands/handlers';
-import { UsersResolver } from './users.query.resolver';
+import { UsersQueryResolver } from './users.query.resolver';
 import { QueryHandlers } from './queries/handlers';
 
 @Module({
@@ -13,7 +13,7 @@ import { QueryHandlers } from './queries/handlers';
   providers: [
     UsersService,
     UsersMutationResolver,
-    UsersResolver,
+    UsersQueryResolver,
     ...CommandHandlers,
     ...QueryHandlers,
   ],

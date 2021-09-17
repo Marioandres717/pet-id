@@ -4,7 +4,7 @@ import { Users } from 'src/graphql';
 import { GetAllUsersQuery, GetUserQuery } from './queries/impl/';
 
 @Resolver('users')
-export class UsersResolver {
+export class UsersQueryResolver {
   constructor(private readonly queryBus: QueryBus) {}
 
   @Query()
