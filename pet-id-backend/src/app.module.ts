@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
 import { PetSpeciesModule } from './pet-species/pet-species.module';
 import { PetsModule } from './pets/pets.module';
 import { UsersModule } from './users/users.module';
+import { AddressesModule } from './addresses/addresses.module';
+import { EventStoreModule } from './event-store/event-store.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { UsersModule } from './users/users.module';
     PetSpeciesModule,
     PetsModule,
     UsersModule,
+    AddressesModule,
+    EventStoreModule,
   ],
-  controllers: [AppController],
 })
 export class AppModule {}
