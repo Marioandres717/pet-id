@@ -1,16 +1,12 @@
 import { QueryHandler, IQueryHandler } from '@nestjs/cqrs';
-// import { serviceService } from 'src/serviceImport/repository/serviceImport.service';
-import { ReadAddressQuery } from 'src/addresses/queries/impl/';
+import { ReadAddressesQuery } from 'src/addresses/queries/impl/';
+import { AddressesService } from 'src/addresses/repository/addresses.service';
 
-@QueryHandler(ReadAddressQuery)
-export class queryHandlerHandler implements IQueryHandler<ReadAddressQuery> {
-  constructor(
-    private foobar: any, // private readonly repository: serviceService,
-  ) {}
+@QueryHandler(ReadAddressesQuery)
+export class ReadAddressesHandler implements IQueryHandler<ReadAddressesQuery> {
+  constructor(private readonly service: AddressesService) {}
 
-  async execute(query: ReadAddressQuery) {
-    // const { queryProps } = query;
-    console.log(`executing address query`);
-    // return await this.repository.findOneById(args);
+  async execute() {
+    return await this.service.readAddresses();
   }
 }

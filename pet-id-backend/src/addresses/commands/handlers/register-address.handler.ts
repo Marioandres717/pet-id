@@ -6,13 +6,13 @@ import { RegisterAddressCommand } from '../impl';
 export class RegisterAddressHandler
   implements ICommandHandler<RegisterAddressCommand> {
   constructor(
-    private readonly repository: AddressesService,
+    private readonly service: AddressesService,
     private readonly publisher: EventPublisher,
   ) {}
 
   async execute(command: RegisterAddressCommand) {
     const { address } = command;
-    await this.repository.registerAddress(address);
+    await this.service.registerAddress(address);
     // return this.publisher.mergeObjectContext(
     //   await this.repository.create(address),
     // );

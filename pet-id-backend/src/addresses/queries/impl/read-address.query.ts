@@ -1,3 +1,1 @@
-export class ReadAddressQuery {
-  constructor(readonly id: number) {}
-}
+export class ReadAddressesQuery {}

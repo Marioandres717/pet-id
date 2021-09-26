@@ -26,4 +26,23 @@ export class AddressesService {
 
     return result;
   }
+
+  async readAddresses(): Promise<any> {
+    const events = await this.eventStore.readStream(
+      this.eventStore.connection,
+      this.STREAM_NAME,
+    );
+    const addresses = [];
+    for await (const { event } of events) {
+      const data: any = event.data;
+
+      switch (event?.type) {
+        case 'register-address':
+          addresses.push(data);
+          break;
+      }
+    }
+
+    return addresses;
+  }
 }
