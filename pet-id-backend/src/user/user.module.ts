@@ -1,19 +1,17 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersMutationResolver } from './users.mutation.resolver';
-import { Users } from './repository';
-import { UsersService } from './repository';
+import { UserMutationResolver, UserQueryResolver } from './api';
+import { User, UsersService } from './repository';
 import { CommandHandlers } from './commands/handlers';
-import { UsersQueryResolver } from './users.query.resolver';
 import { QueryHandlers } from './queries/handlers';
 
 @Module({
-  imports: [CqrsModule, TypeOrmModule.forFeature([Users])],
+  imports: [CqrsModule, TypeOrmModule.forFeature([User])],
   providers: [
     UsersService,
-    UsersMutationResolver,
-    UsersQueryResolver,
+    UserMutationResolver,
+    UserQueryResolver,
     ...CommandHandlers,
     ...QueryHandlers,
   ],

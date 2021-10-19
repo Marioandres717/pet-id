@@ -1,0 +1,20 @@
+type User {
+  id: Int!
+  authId: String!
+  email: String!
+  name: String
+}
+
+type Query {
+  users: [User!]!
+  userByPK(pk: Int!): User
+}
+
+type Mutation {
+  registerUser(input: RegisterUserInput!): User
+}
+
+input RegisterUserInput {
+  email: String!
+  name: String
+}

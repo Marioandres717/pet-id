@@ -1,5 +1,5 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
-import { UsersService } from 'src/users/repository/users.service';
+import { UsersService } from 'src/user/repository/user.service';
 import { CreateUserCommand } from '../impl/create-user.command';
 
 @CommandHandler(CreateUserCommand)
