@@ -1,19 +1,19 @@
 import { QueryBus } from '@nestjs/cqrs';
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { Users } from 'src/graphql';
+import { User } from 'src/new-graphql';
 import { GetAllUsersQuery, GetUserQuery } from '../queries/impl';
 
-@Resolver('users')
+@Resolver('user')
 export class UserQueryResolver {
   constructor(private readonly queryBus: QueryBus) {}
 
   @Query()
-  userByPK(@Args('pk') pk: number): Promise<Users> {
+  userByPK(@Args('pk') pk: number): Promise<User> {
     return this.queryBus.execute(new GetUserQuery(pk));
   }
 
   @Query()
-  users(): Promise<Users[]> {
+  users(): Promise<User[]> {
     return this.queryBus.execute(new GetAllUsersQuery());
   }
 }

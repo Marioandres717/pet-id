@@ -27,10 +27,10 @@ import { join } from 'path';
         path: join(process.cwd(), 'src/new-graphql.ts'),
       },
     }),
-    PetSpeciesModule,
-    PetsModule,
+    // PetSpeciesModule,
+    // PetsModule,
     UsersModule,
-    AddressesModule,
+    // AddressesModule,
     EventStoreModule,
   ],
 })

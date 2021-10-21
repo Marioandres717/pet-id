@@ -1,15 +1,17 @@
 import { CommandBus } from '@nestjs/cqrs';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { Users, Users_insert_input } from 'src/graphql';
+import { RegisterUserInput, User } from 'src/new-graphql';
 import { CreateUserCommand } from '../commands/impl/create-user.command';
 
-@Resolver('users')
+@Resolver('user')
 export class UserMutationResolver {
   constructor(private readonly commandBus: CommandBus) {}
 
   @Mutation()
-  registerUser(@Args('object') data: Users_insert_input): Promise<Users> {
-    const { name, authId, email } = data;
-    return this.commandBus.execute(new CreateUserCommand(name, authId, email));
+  registerUser(@Args('input') args: RegisterUserInput): Promise<User> {
+    const { name, email } = args;
+    return this.commandBus.execute(
+      new CreateUserCommand(name, 'authId', email),
+    );
   }
 }
